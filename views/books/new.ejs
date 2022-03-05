@@ -1,37 +1,37 @@
 <%- include('../partials/html-head') %> <%- include('../partials/nav') %>
 
 <main class="container">
-<div class="container">
 	<form action="/books/find">
 		<label for="search" >Find a book</label>
 		<input type="text" name="search" autocomplete="off"/>
 		<button type="submit">Search</button>
 	</form>
-</div>
 
-<% const book = data.items[0].volumeInfo;
+
+<% for(let i = 0; i < data.items.length; i++) { %>
+<% const book = data.items[i].volumeInfo;
 	const bookId = book.id;
 	const bookTitle = book.title;
 	const bookAuthor = book.authors.join(", ");
 	const bookDescription = book.description.substring(0, 200);
 	const bookCover = book.imageLinks.thumbnail; %> 
 
-<div class="card col-4">
-  <div class="row">
-      <img src="<%= bookCover %>" class="img-fluid rounded-start col-6" alt="...">
-			<div class="col-6">
-			<h5 class="card-title"><%= bookTitle %> </h5>
-			<h6 class="card-title"><%= bookAuthor %> </h6>
-			<h6>⭐️⭐️⭐️⭐️⭐️</h6>
-			<a href="#" class="btn btn-primary">Add to Bookshelf</a>
+	<div class="card col-3">
+		<div class="row"> 
+			<img src="<%= bookCover %> " class="img-fluid rounded-start col-6" alt="...">  
+			<div class="col-6">	
+				<h5 class="card-title"><%= bookTitle %> </h5> 
+				<h6 class="card-title"><%= bookAuthor %> </h6>
+				<h6>⭐️⭐️⭐️⭐️⭐️</h6>
+				<a href="#" class="btn btn-primary">Add to Shelf</a>
 			</div>
+		</div>
+		<div class="card-body col-12 row">
+			<p class="card-text"><%= bookDescription %> 
+			</p>
+		</div>
 	</div>
-	<div class="card-body col-12 row">
-		<p class="card-text"><%= bookDescription %> 
-		</p>
-	</div>
-</div>
-
+	<% } %> 
 
 </main>
 
