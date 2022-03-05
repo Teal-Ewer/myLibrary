@@ -4,7 +4,9 @@ import { Review } from "../models/review.js"
 
 function newBook(req, res) {
   console.log(req.body.params)
-  res.render("books/new")
+  res.render("books/new", {
+    title: "Add a book"
+  })
 }
 
 export {
