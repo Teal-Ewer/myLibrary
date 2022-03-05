@@ -6,6 +6,9 @@ const bookSchema = new Schema(
 	{
 		title: String,
 		author: String,
+		refId: String,
+		cover: String,
+		ownedBy: [{ type: Schema.Types.ObjectId, ref: "Profile" }],
 		reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
 	},
 	{

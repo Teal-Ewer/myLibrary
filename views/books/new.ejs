@@ -8,38 +8,23 @@
 		<button type="submit">Search</button>
 	</form>
 </div>
-<div class="card col-4">
-    <div class="col-5 row g-0">
-      <img src="<%= bookCover %>" class="img-fluid rounded-start col-12" alt="...">
-    </div>
-    <div class="col-5">
-			<h5 class="card-title"><%= bookTitle %> </h5>
-			<h6 class="card-title"><%= bookAuthor %> </h6>
-			<a href="#" class="btn btn-primary">Add to Bookshelf</a>
-			<div class="card-body row g-0">
-			<p class="card-text"><%= bookDescription %> </p>
-			</div>
-		</div>
-</div>
 
 <div class="card col-4">
-  <div class="row g-0">
-    <div class="col-4">
-      <img src="<%= bookCover %>" class="img-fluid rounded-start col-12" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title"><%= bookTitle %> </h5>
-				<h6 class="card-title"><%= bookAuthor %> </h6>
-				<a href="#" class="btn btn-primary">Add to Bookshelf</a>
-				<div class="col-12">
-        <p class="card-text"><%= bookDescription %> 
-				</p>
-				</div>
-      </div>
-    </div>
-  </div>
+  <div class="row">
+      <img src="<%= bookCover %>" class="img-fluid rounded-start col-6" alt="...">
+			<div class="col-6">
+			<h5 class="card-title"><%= bookTitle %> </h5>
+			<h6 class="card-title"><%= bookAuthor %> </h6>
+			<h6>⭐️⭐️⭐️⭐️⭐️</h6>
+			<a href="#" class="btn btn-primary">Add to Bookshelf</a>
+			</div>
+	</div>
+	<div class="card-body col-12 row">
+		<p class="card-text"><%= bookDescription %> 
+		</p>
+	</div>
 </div>
+
 
 </main>
 

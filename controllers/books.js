@@ -13,18 +13,19 @@ async function findBook(req, res) {
 	const response = await fetch(
 		`https://www.googleapis.com/books/v1/volumes?q=${req.query.search}&maxResults=2&key=${process.env.API_KEY}`
 	);
-  const data = await response.json();
-  const book = data.items[0].volumeInfo;
+	const data = await response.json();
+	const book = data.items[0].volumeInfo;
+	const bookId = data.items[0].id;
 	const bookTitle = book.title;
-	const bookAuthor = book.authors[0];
-  const bookDescription = book.description;
-  const bookCover = book.imageLinks.thumbnail;
+	const bookAuthor = book.authors.join(", ");
+	const bookDescription = book.description;
+	const bookCover = book.imageLinks.thumbnail;
 	res.render("books/new", {
 		title: "Add a book",
 		bookTitle,
-    bookAuthor,
-    bookCover,
-    bookDescription
+		bookAuthor,
+		bookCover,
+		bookDescription,
 	});
 }
 
