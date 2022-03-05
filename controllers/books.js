@@ -18,12 +18,12 @@ async function findBook(req, res) {
 	const bookTitle = book.title;
 	const bookAuthor = book.authors[0];
   const bookDescription = book.description;
-  const thumbnail = book.imageLinks.thumbnail;
+  const bookCover = book.imageLinks.thumbnail;
 	res.render("books/new", {
 		title: "Add a book",
 		bookTitle,
     bookAuthor,
-    thumbnail,
+    bookCover,
     bookDescription
 	});
 }

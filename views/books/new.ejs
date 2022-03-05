@@ -1,16 +1,46 @@
 <%- include('../partials/html-head') %> <%- include('../partials/nav') %>
 
-<main>
+<main class="container">
+<div class="container">
 	<form action="/books/find">
 		<label for="search" >Find a book</label>
 		<input type="text" name="search" autocomplete="off"/>
 		<button type="submit">Search</button>
 	</form>
-	<h1><%= bookTitle %> </h1>
-	<h3><%= bookAuthor %> </h3>
-	<img src="<%= thumbnail %>" alt="">
-	<p><%= bookDescription %> </p>
-	
+</div>
+<div class="card col-4">
+    <div class="col-5 row g-0">
+      <img src="<%= bookCover %>" class="img-fluid rounded-start col-12" alt="...">
+    </div>
+    <div class="col-5">
+			<h5 class="card-title"><%= bookTitle %> </h5>
+			<h6 class="card-title"><%= bookAuthor %> </h6>
+			<a href="#" class="btn btn-primary">Add to Bookshelf</a>
+			<div class="card-body row g-0">
+			<p class="card-text"><%= bookDescription %> </p>
+			</div>
+		</div>
+</div>
+
+<div class="card col-4">
+  <div class="row g-0">
+    <div class="col-4">
+      <img src="<%= bookCover %>" class="img-fluid rounded-start col-12" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><%= bookTitle %> </h5>
+				<h6 class="card-title"><%= bookAuthor %> </h6>
+				<a href="#" class="btn btn-primary">Add to Bookshelf</a>
+				<div class="col-12">
+        <p class="card-text"><%= bookDescription %> 
+				</p>
+				</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </main>
 
 
