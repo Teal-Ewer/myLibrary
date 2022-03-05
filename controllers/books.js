@@ -3,23 +3,29 @@ import { Book } from "../models/book.js";
 import { Review } from "../models/review.js";
 import fetch from "node-fetch";
 
-async function newBook(req, res) {
-  // fetch("https://openlibrary.org/works/OL1963268W.json")
-  //   .then(reso => {
-  //   reso.json()
-  //   })
-  //   .then(data => {
-  //   console.log(data)
-  // })
-  // res.render("books/new", {
-  //   title: "Add a book",
-  // });
-  const response = await fetch("https://openlibrary.org/works/OL1963268W.json");
-	const data = await response.text();
-  res.render("books/new", {
-    title: "Add a book", 
-    data
-  })
+function index(req, res) {
+	res.render("books/index", {
+		title: "All Books",
+	});
 }
 
-export { newBook as new };
+async function findBook(req, res) {
+	const response = await fetch(
+		`https://www.googleapis.com/books/v1/volumes?q=${req.query.search}&maxResults=2`
+	);
+  const data = await response.json();
+  const book = data.items[0].volumeInfo;
+	const bookTitle = book.title;
+	const bookAuthor = book.authors[0];
+  const bookDescription = book.description;
+  const thumbnail = book.imageLinks.thumbnail;
+	res.render("books/new", {
+		title: "Add a book",
+		bookTitle,
+    bookAuthor,
+    thumbnail,
+    bookDescription
+	});
+}
+
+export { index, findBook };
