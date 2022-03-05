@@ -11,7 +11,7 @@ function index(req, res) {
 
 async function findBook(req, res) {
 	const response = await fetch(
-		`https://www.googleapis.com/books/v1/volumes?q=${req.query.search}&maxResults=2`
+		`https://www.googleapis.com/books/v1/volumes?q=${req.query.search}&maxResults=2&key=${process.env.API_KEY}`
 	);
   const data = await response.json();
   const book = data.items[0].volumeInfo;
