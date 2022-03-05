@@ -1,22 +1,23 @@
 <%- include('../partials/html-head') %> <%- include('../partials/nav') %>
 
 <main class="container">
+
 	<form action="/books/find">
 		<label for="search" >Find a book</label>
 		<input type="text" name="search" autocomplete="off"/>
 		<button type="submit">Search</button>
 	</form>
 
+	<div class="container d-flex">
+	<% for (let i = 0; i < data.items.length; i++) { %>
+	<% const book = data.items[i].volumeInfo;
+		const bookId = book.id;
+		const bookTitle = book.title;
+		const bookAuthor = book.authors.join(", ");
+		const bookDescription = book.description.substring(0, 200);
+		const bookCover = book.imageLinks.thumbnail; %> 
 
-<% for(let i = 0; i < data.items.length; i++) { %>
-<% const book = data.items[i].volumeInfo;
-	const bookId = book.id;
-	const bookTitle = book.title;
-	const bookAuthor = book.authors.join(", ");
-	const bookDescription = book.description.substring(0, 200);
-	const bookCover = book.imageLinks.thumbnail; %> 
-
-	<div class="card col-3">
+	<div class="card col-3 col-l-12">
 		<div class="row"> 
 			<img src="<%= bookCover %> " class="img-fluid rounded-start col-6" alt="...">  
 			<div class="col-6">	
@@ -32,8 +33,7 @@
 		</div>
 	</div>
 	<% } %> 
-
+</div>
 </main>
-
 
 <%- include('../partials/footer') %>
