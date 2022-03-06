@@ -1,4 +1,6 @@
-<%- include('../partials/html-head') %> <%- include('../partials/nav') %>
+<%- include('../partials/html-head') %> 
+<link rel="stylesheet" href="../../public/stylesheets/style.css">
+<%- include('../partials/nav') %>
 
 <main class="container-fluid">
 	<form action="/books/find">
@@ -37,7 +39,7 @@
 					<h6>Average Rating: <%= bookRating %> 
 					</h6>
 					<form action="/books/<%= bookId %>" method="POST">
-						<button class="btn btn-primary">Add to Shelf</button>
+						<button class="btn btn-danger">Add to Shelf</button>
 					</form>
 				</div>
 			</div>
