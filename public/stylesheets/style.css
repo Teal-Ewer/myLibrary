@@ -3,7 +3,7 @@ body {
 }
 
 .card {
-	background-color: #F8F9FA;
+	background-color: #f8f9fa;
 }
 
 .logo-group {
@@ -12,5 +12,6 @@ body {
 }
 
 .profile-avatar {
-	margin-top: 50px;
+	border-radius: 50%;
+	border: 2px solid grey;
 }

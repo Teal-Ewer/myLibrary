@@ -1,13 +1,14 @@
 <%- include('./partials/html-head') %>
 <%- include('./partials/nav') %>
 
-<main>
+<main class="container">
   <h1>hello, <%= user ? user.profile.name : "friend" %></h1>
   <% if (user?.profile.avatar) { %>
     <div>
       <img
         src="<%= user.profile.avatar %>"
         alt="<%= user.profile.name %> avatar"
+        class="profile-avatar"
       />
     </div>
   <% } %>
