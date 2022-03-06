@@ -20,10 +20,15 @@ async function findBook(req, res) {
 	});
 }
 
-function create(req, res) {
+async function createBook(req, res) {
+	const response = await fetch(
+		`https://www.googleapis.com/books/v1/volumes/${req.params.id}?&key=${process.env.API_KEY}`
+	);
+	const data = await response.json();
+	console.log(data)
 	res.render("books", {
-		title: "All Books"
+		title: "All books",
 	})
 }
 
-export { index, findBook, create };
+export { index, findBook, createBook };

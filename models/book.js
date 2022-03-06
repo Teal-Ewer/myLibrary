@@ -6,7 +6,7 @@ const bookSchema = new Schema(
 	{
 		title: String,
 		authors: [String],
-		refId: String,
+		bookId: String,
 		cover: String,
 		description: String,
 		googleURL: String,
