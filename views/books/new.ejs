@@ -1,6 +1,6 @@
 <%- include('../partials/html-head') %> <%- include('../partials/nav') %>
 
-<main class="container">
+<main class="container-fluid">
 
 	<form action="/books/find">
 		<label for="search" >Find a book</label>
@@ -8,16 +8,18 @@
 		<button type="submit">Search</button>
 	</form>
 
-	<div class="container d-flex">
+	<div class="d-flex flex-wrap">
 	<% for (let i = 0; i < data.items.length; i++) { %>
 	<% const book = data.items[i].volumeInfo;
 		const bookId = book.id;
 		const bookTitle = book.title;
 		const bookAuthor = book.authors.join(", ");
-		const bookDescription = book.description.substring(0, 200);
-		const bookCover = book.imageLinks.thumbnail; %> 
 
-	<div class="card col-3 col-l-12">
+		const bookDescription = book.description ? book.description.substring(0, 200) : "No description available";
+		
+		const bookCover = book.imageLinks ? book.imageLinks.thumbnail : "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2730&q=80"; %> 
+
+	<div class="card col-3 g-4">
 		<div class="row"> 
 			<img src="<%= bookCover %> " class="img-fluid rounded-start col-6" alt="...">  
 			<div class="col-6">	
