@@ -4,7 +4,7 @@ import { Review } from "../models/review.js";
 import fetch from "node-fetch";
 
 function index(req, res) {
-	res.render("books/index", {
+	res.render("books", {
 		title: "All Books",
 	});
 }
@@ -20,4 +20,10 @@ async function findBook(req, res) {
 	});
 }
 
-export { index, findBook };
+function create(req, res) {
+	res.render("books", {
+		title: "All Books"
+	})
+}
+
+export { index, findBook, create };
