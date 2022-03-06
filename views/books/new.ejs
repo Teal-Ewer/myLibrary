@@ -8,12 +8,12 @@
 		<button type="submit">Search</button>
 	</form>
 
-	<div class="d-flex flex-wrap">
+	<div class="d-flex flex-wrap justify-content-between">
 	<% for (let i = 0; i < data.items.length; i++) { %>
 	<% const book = data.items[i].volumeInfo;
 		const bookId = book.id;
 		const bookTitle = book.title;
-		const bookAuthor = book.authors.join(", ");
+		const bookAuthor = book.authors ? book.authors.join(", ") : "No author available";
 
 		const bookDescription = book.description ? book.description.substring(0, 200) : "No description available";
 		
