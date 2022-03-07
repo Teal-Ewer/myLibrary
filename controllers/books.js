@@ -68,7 +68,19 @@ async function createBook(req, res) {
 }
 
 function show(req, res) {
-	res.render("books/show")
+	Book.findById(req.params.id)
+		.populate("ownedBy")
+		.then(book => {
+			res.render("books/show", {
+				title: book.title,
+				book,
+			});
+		})
+		.catch(err => {
+			console.log(err);
+			res.redirect("/books");
+		});
+	
 }
 
 export { index, findBook, createBook, show };

@@ -20,14 +20,20 @@
 					<div class="col-6">
 						<h5 class="card-title"><%= book.title %></h5>
 						<h6 class="card-title"><%= book.authors.join(", ").substring(0, 80) %></h6>
-						<form action="/books/<%= book.id %>" method="GET">
+						<form action="/books/<%= book._id %>" method="GET">
 							<button class="btn btn-primary">Details</button>
 						</form>
 						
 					</div>
 				</div>
 			<div class="card-body col-12 row">
-				<h6>Owned by: <%= book.ownedBy[0].name %></h6>
+				<% if (user) { %> 
+				<h6>Owned by: <%= book.ownedBy[0].name %> 
+				<% if (book.ownedBy.length > 1) { %>
+					<%= `and ${book.ownedBy.length} others.` %> 
+				<% } %>
+				</h6>
+				<% } %> 
 				<p class="card-text"><%= book.description.substring(0, 200).concat("...") %></p>
 			</div>
 		</div>

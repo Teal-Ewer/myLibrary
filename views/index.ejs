@@ -1,8 +1,8 @@
 <%- include('./partials/html-head') %>
 <%- include('./partials/nav') %>
-<div class="container">
-  <main class="justify-content-center">
-    <h1>Welcome <%= user ? user.profile.name.split(" ")[0].concat("!") : "fellow reader!" %></h1>
+<main class="container justify-content-center">
+  <div>
+    <h1>Welcome <%= user ? user.profile.name.split(" ")[0].concat("!") : ", fellow reader!" %></h1>
     <% if (user?.profile.avatar) { %>
       <div>
         <img
@@ -12,6 +12,6 @@
         />
       </div>
     <% } %>
-  </main>
-</div>
+  </div>
+</main>
 <%- include('./partials/footer') %>
