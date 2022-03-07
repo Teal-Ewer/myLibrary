@@ -18,8 +18,8 @@
 					</div>
 				</div>
 			<div class="card-body col-12 row">
-        <% book.ownedBy.forEach(profile => { %>
-          <h6>Owned by: <%= profile.name %></h6>
+        <% book.availableFrom.forEach(profile => { %>
+          <h6>Available from: <%= profile.name %></h6>
         <% }) %>
 				<p class="card-text"><%= book.description %></p>
 			</div>

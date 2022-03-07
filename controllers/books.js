@@ -2,6 +2,7 @@ import { Profile } from "../models/profile.js";
 import { Book } from "../models/book.js";
 import { Review } from "../models/review.js";
 import fetch from "node-fetch";
+import striptags from "striptags";
 
 function index(req, res) {
 	Book.find({})
@@ -38,12 +39,13 @@ async function createBook(req, res) {
 	const bookId = data.id;
 	const url = data.selfLink;
 	const title = bookData.title;
+	const publishDate = bookData.publishedDate;
 	const rating = bookData.averageRating;
 	const authors = bookData.authors
 		? bookData.authors
 		: "No author available";
 	const description = bookData.description
-		? bookData.description
+		? striptags(bookData.description)
 		: "No description available";
 	const cover = bookData.imageLinks
 		? bookData.imageLinks.thumbnail
@@ -52,11 +54,13 @@ async function createBook(req, res) {
 		title,
 		authors,
 		bookId,
+		publishDate,
 		cover,
 		rating,
 		description,
 		url,
 		ownedBy: req.user.profile._id,
+		availableFrom: req.user.profile._id,
 	})
 		.then(book => {
 			res.redirect("/books");
@@ -69,7 +73,7 @@ async function createBook(req, res) {
 
 function show(req, res) {
 	Book.findById(req.params.id)
-		.populate("ownedBy")
+		.populate("availableFrom")
 		.then(book => {
 			res.render("books/show", {
 				title: book.title,

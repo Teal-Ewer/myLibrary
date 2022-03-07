@@ -1,11 +1,10 @@
 <%- include('../partials/html-head') %>
 <link rel="stylesheet" href="../../public/stylesheets/style.css" />
 <%- include('../partials/nav') %>
-
 <main class="container">
 	<div class="pt-3 row">
 		<h1>Search Results</h1>
-		<form action="/books/find" class="p-3">
+		<form action="/books/find">
 			<div class="input-group mb-3">
 				<input
 					type="text"
@@ -22,8 +21,8 @@
 		</form>
 	</div>
 
-	<div class="d-flex flex-wrap pt-3">
-		<% for (let i = 0; i < data.items.length; i++) { %> <% const book =
+	<div class="d-flex flex-wrap">
+		<% for (let i = 0; i < data.items.length; i++) { const book =
 		data.items[i].volumeInfo; const bookId = data.items[i].id; const bookTitle =
 		book.title; const bookRating = book.averageRating; const bookAuthor =
 		book.authors ? book.authors.join(", "): "No author available"; const
@@ -36,7 +35,7 @@
 		<div class="card col-6 col-lg-3 p-2">
 			<div class="row">
 				<img
-					src="<%= bookCover %> "
+					src="<%= bookCover %>"
 					class="img-fluid rounded-start col-6"
 					alt="..."
 				/>
