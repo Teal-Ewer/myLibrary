@@ -2,7 +2,7 @@
 
 <main class="container">
 	<div class="pt-3">
-		<h1>All Books</h1>
+		<h1 class="" style="inline">All Books</h1>
 		<form action="/books/find" class="form-control p-3">
 			<label class="visually-hidden" for="search">Find a book</label>
 			<input
@@ -10,6 +10,7 @@
 				name="search"
 				autocomplete="off"
 				placeholder="Find a book"
+				required
 			/>
 			<button class="btn btn-primary" type="submit">Search</button>
 		</form>
@@ -17,7 +18,7 @@
 
 	<div class="d-flex flex-wrap pt-3">
 		<% books.forEach(book => { %>
-		<div class="card col-6 col-sm-4 col-lg-3 p-2">
+		<div class="card col-6 col-lg-3 p-2">
 			<div class="row">
 				<img src="<%= book.cover %> " class="rounded-start col-6" alt="..." />
 				<div class="col-6">
