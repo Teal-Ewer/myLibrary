@@ -41,9 +41,7 @@ async function createBook(req, res) {
 	const title = bookData.title;
 	const publishDate = bookData.publishedDate;
 	const rating = bookData.averageRating;
-	const authors = bookData.authors
-		? bookData.authors
-		: "No author available";
+	const authors = bookData.authors ? bookData.authors : "No author available";
 	const description = bookData.description
 		? striptags(bookData.description)
 		: "No description available";
@@ -63,7 +61,7 @@ async function createBook(req, res) {
 		availableFrom: req.user.profile._id,
 	})
 		.then(book => {
-			res.redirect("/books");
+			res.redirect("/book");
 		})
 		.catch(err => {
 			console.log(err);
@@ -84,7 +82,6 @@ function show(req, res) {
 			console.log(err);
 			res.redirect("/books");
 		});
-	
 }
 
 export { index, findBook, createBook, show };
