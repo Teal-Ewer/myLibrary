@@ -1,20 +1,25 @@
 <%- include('../partials/html-head') %> <%- include('../partials/nav') %>
 
 <main class="container">
-	<div class="pt-3">
-		<h1 class="" style="inline">All Books</h1>
-		<form action="/books/find" class="form-control p-3">
-			<label class="visually-hidden" for="search">Find a book</label>
-			<input
-				type="text"
-				name="search"
-				autocomplete="off"
-				placeholder="Find a book"
-				required
-			/>
-			<button class="btn btn-primary" type="submit">Search</button>
+	<div class="pt-3 row">
+		<h1>All Books</h1>
+		<form action="/books/find" class="p-3">
+			<div class="input-group mb-3">
+				<input
+					type="text"
+					class="form-control"
+					name="search"
+					autocomplete="off"
+					placeholder="Find a book"
+					required
+				/>
+				<div class="input-group-append">
+					<button class="input-group-text btn btn-primary">Search</button>
+				</div>
+			</div>
 		</form>
 	</div>
+
 
 	<div class="d-flex flex-wrap pt-3">
 		<% books.forEach(book => { %>
