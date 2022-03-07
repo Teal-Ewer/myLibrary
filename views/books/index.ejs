@@ -10,24 +10,24 @@
 	<div class="d-flex flex-wrap g1">
 
 		<% books.forEach(book => { %> 
-			<div class="card col-6 col-sm-4 col-lg-3 p-2">
+			<div class="card col-6 col-m-4 col-lg-3 p-2">
 				<div class="row">
 					<img
 						src="<%= book.cover %> "
-						class="img-fluid rounded-start col-6"
+						class="rounded-start col-6"
 						alt="..."
 					/>
 					<div class="col-6">
 						<h5 class="card-title"><%= book.title %></h5>
 						<h6 class="card-title"><%= book.authors.join(", ").substring(0, 80) %></h6>
-						<h6>Average Rating: <%= book.rating %> 
-						</h6>
 						<form action="/books/<%= book.id %>" method="GET">
 							<button class="btn btn-primary">Details</button>
 						</form>
+						
 					</div>
 				</div>
 			<div class="card-body col-12 row">
+				<h6>Owned by: <%= book.ownedBy[0].name %></h6>
 				<p class="card-text"><%= book.description.substring(0, 200).concat("...") %></p>
 			</div>
 		</div>

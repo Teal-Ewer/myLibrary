@@ -5,6 +5,7 @@ import fetch from "node-fetch";
 
 function index(req, res) {
 	Book.find({})
+		.populate("ownedBy")
 		.then(books => {
 			res.render("books/index", {
 				title: "All Books",
@@ -33,28 +34,28 @@ async function createBook(req, res) {
 		`https://www.googleapis.com/books/v1/volumes/${req.params.id}?&key=${process.env.API_KEY}`
 	);
 	const data = await response.json();
-	const book = data.volumeInfo;
+	const bookData = data.volumeInfo;
 	const bookId = data.id;
 	const url = data.selfLink;
-	const title = book.title;
-	const rating = book.averageRating;
-	const authors = book.authors
-		? book.authors
+	const title = bookData.title;
+	const rating = bookData.averageRating;
+	const authors = bookData.authors
+		? bookData.authors
 		: "No author available";
-	const bookDescription = book.description
-		? book.description
+	const description = bookData.description
+		? bookData.description
 		: "No description available";
-	const bookCover = book.imageLinks
-		? book.imageLinks.thumbnail
+	const cover = bookData.imageLinks
+		? bookData.imageLinks.thumbnail
 		: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2730&q=80";
 	Book.create({
-		title: bookTitle,
-		authors: bookAuthor,
-		bookId: bookId,
-		cover: bookCover,
-		rating: bookRating,
-		description: bookDescription,
-		googleURL: url,
+		title,
+		authors,
+		bookId,
+		cover,
+		rating,
+		description,
+		url,
 		ownedBy: req.user.profile._id,
 	})
 		.then(book => {
@@ -67,7 +68,7 @@ async function createBook(req, res) {
 }
 
 function show(req, res) {
-	
+	res.render("books/show")
 }
 
 export { index, findBook, createBook, show };
