@@ -16,8 +16,10 @@ function index(req, res) {
 
 function show(req, res) {
 	Profile.findById(req.params.id)
+		.populate("bookshelf")
 		.then(profile => {
-			Profile.findById(req.user.profile._id).then(self => {
+			Profile.findById(req.user.profile._id)
+				.then(self => {
 				const isSelf = self._id.equals(profile._id);
 				res.render("profiles/show", {
 					title: `${profile.name}'s profile`,
@@ -33,7 +35,4 @@ function show(req, res) {
 		});
 }
 
-export {
-	index, 
-	show
-}
+export { index, show };

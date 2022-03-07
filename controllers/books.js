@@ -6,7 +6,6 @@ import striptags from "striptags";
 
 function index(req, res) {
 	Book.find({})
-		.populate("ownedBy")
 		.then(books => {
 			res.render("books/index", {
 				title: "All Books",
@@ -21,7 +20,7 @@ function index(req, res) {
 
 async function findBook(req, res) {
 	const response = await fetch(
-		`https://www.googleapis.com/books/v1/volumes?q=${req.query.search}&maxResults=12&key=${process.env.API_KEY}`
+		`https://www.googleapis.com/books/v1/volumes?q=${req.query.search}&maxResults=8&key=${process.env.API_KEY}`
 	);
 	const data = await response.json();
 	res.render("books/new", {
@@ -61,7 +60,12 @@ async function createBook(req, res) {
 		availableFrom: req.user.profile._id,
 	})
 		.then(book => {
-			res.redirect("/book");
+			Profile.findByIdAndUpdate(req.user.profile._id)
+				.then(profile => {
+					profile.bookshelf.push(book)
+					profile.save()
+						.then(() => res.redirect("/books"));
+				})
 		})
 		.catch(err => {
 			console.log(err);
