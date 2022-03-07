@@ -1,45 +1,49 @@
 <%- include('../partials/html-head') %> <%- include('../partials/nav') %>
 
 <main class="container">
-	<form action="/books/find" class="pt-3">
-		<label class="visually-hidden" for="search">Find a book</label>
-		<input class="form-control" type="text" name="search" autocomplete="off" placeholder="Find a book"/>
-		<button class="btn btn-primary" type="submit">Search</button>
-	</form>
+	<div class="pt-3">
+		<h1>All Books</h1>
+		<form action="/books/find" class="form-control p-3">
+			<label class="visually-hidden" for="search">Find a book</label>
+			<input
+				type="text"
+				name="search"
+				autocomplete="off"
+				placeholder="Find a book"
+			/>
+			<button class="btn btn-primary" type="submit">Search</button>
+		</form>
+	</div>
 
-	<div class="d-flex flex-wrap g1">
-
-		<% books.forEach(book => { %> 
-			<div class="card col-6 col-m-4 col-lg-3 p-2">
-				<div class="row">
-					<img
-						src="<%= book.cover %> "
-						class="rounded-start col-6"
-						alt="..."
-					/>
-					<div class="col-6">
-						<h5 class="card-title"><%= book.title %></h5>
-						<h6 class="card-title"><%= book.authors.join(", ").substring(0, 80) %></h6>
-						<form action="/books/<%= book._id %>" method="GET">
-							<button class="btn btn-primary">Details</button>
-						</form>
-						
-					</div>
+	<div class="d-flex flex-wrap pt-3">
+		<% books.forEach(book => { %>
+		<div class="card col-6 col-sm-4 col-lg-3 p-2">
+			<div class="row">
+				<img src="<%= book.cover %> " class="rounded-start col-6" alt="..." />
+				<div class="col-6">
+					<h5 class="card-title"><%= book.title %></h5>
+					<h6 class="card-title">
+						<%= book.authors.join(", ").substring(0, 80) %>
+					</h6>
+					<form action="/books/<%= book._id %>" method="GET">
+						<button class="btn btn-primary">Details</button>
+					</form>
 				</div>
+			</div>
 			<div class="card-body col-12 row">
-				<% if (user) { %> 
-				<h6>Owned by: <%= book.ownedBy[0].name %> 
-				<% if (book.ownedBy.length > 1) { %>
-					<%= `and ${book.ownedBy.length} others.` %> 
-				<% } %>
+				<% if (user) { %>
+				<h6>
+					Owned by: <%= book.ownedBy[0].name %> <% if (book.ownedBy.length > 1)
+					{ %> <%= `and ${book.ownedBy.length} others.` %> <% } %>
 				</h6>
-				<% } %> 
-				<p class="card-text"><%= book.description.substring(0, 200).concat("...") %></p>
+				<% } %>
+				<p class="card-text">
+					<%= book.description.substring(0, 200).concat("...") %>
+				</p>
 			</div>
 		</div>
 		<% }) %>
 	</div>
 </main>
-
 
 <%- include('../partials/footer') %>

@@ -18,11 +18,9 @@
 					</div>
 				</div>
 			<div class="card-body col-12 row">
-				<h6>Owned by: <%= book.ownedBy[0].name %> 
-				<% if (book.ownedBy.length > 1) { %>
-					<%= `and ${book.ownedBy.length} others.` %> 
-				<% } %>
-			</h6>
+        <% book.ownedBy.forEach(profile => { %>
+          <h6>Owned by: <%= profile.name %></h6>
+        <% }) %>
 				<p class="card-text"><%= book.description %></p>
 			</div>
 		</div>

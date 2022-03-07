@@ -3,19 +3,21 @@
 <%- include('../partials/nav') %>
 
 <main class="container">
-	<form action="/books/find" class="pt-3">
-		<label class="visually-hidden" for="search">Find a book</label>
-		<input
-			class="form-control"
-			type="text"
-			name="search"
-			autocomplete="off"
-			placeholder="Find a book"
-		/>
-		<button class="btn btn-primary" type="submit">Search</button>
-	</form>
+		<div class="pt-3">
+		<h1>Search Results</h1>
+		<form action="/books/find" class="form-control p-3">
+			<label class="visually-hidden" for="search">Find a book</label>
+			<input
+				type="text"
+				name="search"
+				autocomplete="off"
+				placeholder="Find a book"
+			/>
+			<button class="btn btn-primary" type="submit">Search</button>
+		</form>
+	</div>
 
-	<div class="d-flex flex-wrap">
+	<div class="d-flex flex-wrap pt-3">
 		<% for (let i = 0; i < data.items.length; i++) { %> <% const book =
 		data.items[i].volumeInfo; const bookId = data.items[i].id; const bookTitle =
 		book.title; const bookRating = book.averageRating; const bookAuthor =
