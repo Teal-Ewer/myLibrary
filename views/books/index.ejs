@@ -22,8 +22,8 @@
 						<h6 class="card-title"><%= book.authors.join(", ").substring(0, 80) %></h6>
 						<h6>Average Rating: <%= book.rating %> 
 						</h6>
-						<form action="/books/<%= book.id %>" method="POST">
-							<button class="btn btn-primary">Add</button>
+						<form action="/books/<%= book.id %>" method="GET">
+							<button class="btn btn-primary">Details</button>
 						</form>
 					</div>
 				</div>

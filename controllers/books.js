@@ -36,10 +36,10 @@ async function createBook(req, res) {
 	const book = data.volumeInfo;
 	const bookId = data.id;
 	const url = data.selfLink;
-	const bookTitle = book.title;
-	const bookRating = book.averageRating;
-	const bookAuthor = book.authors
-		? book.authors.join(", ")
+	const title = book.title;
+	const rating = book.averageRating;
+	const authors = book.authors
+		? book.authors
 		: "No author available";
 	const bookDescription = book.description
 		? book.description
@@ -66,4 +66,8 @@ async function createBook(req, res) {
 		});
 }
 
-export { index, findBook, createBook };
+function show(req, res) {
+	
+}
+
+export { index, findBook, createBook, show };
