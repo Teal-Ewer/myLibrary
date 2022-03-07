@@ -1,13 +1,13 @@
 <%- include('../partials/html-head') %> <%- include('../partials/nav') %>
 
 <main class="container">
-	<form action="/books/find" class="">
+	<form action="/books/find" class="pt-3">
 		<label class="visually-hidden" for="search">Find a book</label>
 		<input class="form-control" type="text" name="search" autocomplete="off" placeholder="Find a book"/>
 		<button class="btn btn-primary" type="submit">Search</button>
 	</form>
 
-	<div class="d-flex flex-wrap">
+	<div class="d-flex flex-wrap g1">
 
 		<% books.forEach(book => { %> 
 			<div class="card col-6 col-sm-4 col-lg-3 p-2">
