@@ -1,11 +1,38 @@
 <%- include('../partials/html-head') %> <%- include('../partials/nav') %>
 
-<main>
-	<form action="/books/find">
-		<label for="search" >Find a book</label>
-		<input type="text" name="search" autocomplete="off"/>
-		<button type="submit">Search</button>
+<main class="container">
+	<form action="/books/find" class="">
+		<label class="visually-hidden" for="search">Find a book</label>
+		<input class="form-control" type="text" name="search" autocomplete="off" placeholder="Find a book"/>
+		<button class="btn btn-primary" type="submit">Search</button>
 	</form>
+
+	<div class="d-flex flex-wrap">
+
+		<% books.forEach(book => { %> 
+			<div class="card col-6 col-sm-4 col-lg-3 p-2">
+				<div class="row">
+					<img
+						src="<%= book.cover %> "
+						class="img-fluid rounded-start col-6"
+						alt="..."
+					/>
+					<div class="col-6">
+						<h5 class="card-title"><%= book.title %></h5>
+						<h6 class="card-title"><%= book.authors.join(", ").substring(0, 80) %></h6>
+						<h6>Average Rating: <%= book.rating %> 
+						</h6>
+						<form action="/books/<%= book.id %>" method="POST">
+							<button class="btn btn-primary">Add</button>
+						</form>
+					</div>
+				</div>
+			<div class="card-body col-12 row">
+				<p class="card-text"><%= book.description.substring(0, 200).concat("...") %></p>
+			</div>
+		</div>
+		<% }) %>
+	</div>
 </main>
 
 

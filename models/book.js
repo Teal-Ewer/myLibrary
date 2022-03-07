@@ -8,6 +8,7 @@ const bookSchema = new Schema(
 		authors: [String],
 		bookId: String,
 		cover: String,
+		rating: Number,
 		description: String,
 		googleURL: String,
 		ownedBy: [{ type: Schema.Types.ObjectId, ref: "Profile" }],
