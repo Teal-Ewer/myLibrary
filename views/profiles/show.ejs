@@ -2,16 +2,7 @@
 <%- include('../partials/nav') %>
 
 
-<main class="container py-5 px-3>
-	<% if (profile.avatar) { %>
-	<div>
-		<img
-			class="profile-avatar"
-			src="<%= profile.avatar %>"
-			alt="<%= profile.name %> avatar"
-		/>
-	</div>
-	<% } %>
+<main class="container p-3">
 	<h1><%= isSelf ? "Your" : profile.name.split(" ")[0].concat("'s") %> Shelf</h1>
 
 	<% if(!profile.bookshelf) { %> 

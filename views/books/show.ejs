@@ -1,28 +1,30 @@
-<%- include('../partials/html-head') %>
+<%- include('../partials/html-head') %> 
+<link rel="stylesheet" href="/stylesheets/style.css">
 <%- include('../partials/nav') %>
 
-<div class="card col-6 col-m-4 col-lg-3 p-2">
-				<div class="row">
-					<img
-						src="<%= book.cover %> "
-						class="rounded-start col-6"
-						alt="..."
-					/>
-					<div class="col-6">
-						<h5 class="card-title"><%= book.title %></h5>
-						<h6 class="card-title"><%= book.authors.join(", ") %></h6>
-						<form action="/books/<%= book._id %>" method="GET">
-							<button class="btn btn-primary">Details</button>
-						</form>
-						
-					</div>
-				</div>
-			<div class="card-body col-12 row">
-        <% book.availableFrom.forEach(profile => { %>
-          <h6>Available from: <%= profile.name %></h6>
-        <% }) %>
-				<p class="card-text"><%= book.description %></p>
+<main class="container">
+	<div class="card col-6 p-2 mt-3">
+		<div class="row">
+			<img src="<%= book.cover %> " class="rounded-start col-4" alt="..." />
+			<div class="col-8">
+				<h2 class="card-title"><%= book.title %></h2>
+				<h4 class="card-title"><%= book.authors.join(", ") %></h4>
+				<form action="/books/<%= book._id %>" method="GET">
+					<button class="btn btn-primary">Details</button>
+				</form>
+				<% if (book.ownedBy.includes(user.profile._id)) { %> 
+					
+				<% } %> 
+			<% book.availableFrom.forEach(profile => { %>
+				<h5>Available from: <%= profile.name %></h5>
+			<% }) %>
 			</div>
 		</div>
+		<div class="card-body col-12 row">
+		
+			<p class="card-text"><%= book.description %></p>
+		</div>
+	</div>
+</main>
 
 <%- include('../partials/footer') %>
