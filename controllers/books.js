@@ -93,6 +93,7 @@ async function createBook(req, res) {
 
 function show(req, res) {
 	Book.findById(req.params.id)
+		// .populate("availableFrom")
 		.then(book => {
 			res.render("books/show", {
 				title: book.title,
@@ -156,7 +157,37 @@ function updateOwner(req, res) {
 }
 
 function updateAvailability(req, res) {
-	
+	Book.findByIdAndUpdate(req.params.id)
+		.then(book => {
+			book.availableFrom.includes(profile)
+					? book.availableFrom.remove(profile)
+					: book.availableFrom.push(profile);
+				
+			
+			profile.availableBooks.includes(book)
+					? profile.availableBooks.remove(book)
+					: profile.availableBooks.push(book);
+
+				book.availableFrom.includes(profile)
+					? book.availableFrom.remove(profile)
+					: book.availableFrom.push(profile);
+				book.save();
+				profile.save()
+				.then(() => res.redirect(`/books/${book._id}`))
+			});
+		})
+		.catch(err => {
+			console.log(err);
+			res.redirect("/books");
+		});
 }
 
-export { index, findBook, createBook, show, deleteBook, updateOwner, updateAvailability };
+export {
+	index,
+	findBook,
+	createBook,
+	show,
+	deleteBook,
+	updateOwner,
+	updateAvailability,
+};

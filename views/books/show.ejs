@@ -13,20 +13,26 @@
 					<form action="/books/<%= book._id %>?_method=DELETE" method="POST">
 						<button class="btn btn-danger">Delete</button>
 					</form>
+					<% if (book.availableFrom.includes(user.profile._id)) { %>
+					<h5>Available from You</h5>
+					<form action="/books/<%= book._id %>/updateAvailability" method="GET">
+						<button class="btn btn-secondary">Change</button>
+					</form>  
+					<% } %>
 				<% } else { %>
 					<form action="/books/<%= book._id %>/update" method="GET">
 						<button class="btn btn-primary">Add</button>
 					</form>
 				<% } %> 
-				<% if (book.availableFrom.includes(user.profile._id)) { %>
-					<h5>Available from: <%= user.profile.name %>
+			<!-- <% book.availableFrom.forEach(profile => { %>
+				<% if (profile._id === user.profile._id) { %>
+				 	<h5>Available from You</h5>
 					<form action="/profiles/<%= user.profile._id%>?_method=PUT" method="POST">
 						<button class="btn btn-secondary">Change</button>
-					</form>  
-				</h5>
-				<% } %>
-			<!-- <% book.availableFrom.forEach(profile => { %>
+					</form> 
+				<% } else { %>
 				<h5>Available from: <%= profile.name %></h5>
+				<% } %>
 			<% }) %> -->
 			</div>
 		</div>
