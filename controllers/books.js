@@ -23,28 +23,29 @@ async function findBook(req, res) {
 		`https://www.googleapis.com/books/v1/volumes?q=${req.query.search}&maxResults=8&key=${process.env.API_KEY}`
 	);
 	const data = await response.json();
-	const bookIds = [];
-	data.items.forEach(item => {
-		bookIds.push(item.id);
-	});
-	Book.find({})
-		.then(books => {
-			books.forEach((book) => {
-				if (bookIds.includes(book.bookId)) {
-					console.log(book.bookId)
-					data.items.splice(data.items[book.bookId], 1, book)
-				}
-			})
-			console.log(data.items)
+	// const bookIds = [];
+	// data.items.forEach(item => {
+	// 	bookIds.push(item.id);
+	// });
+	// console.log(bookIds);
+	// Book.find({})
+	// 	.then(books => {
+	// 		books.forEach(book => {
+	// 			if (bookIds.includes(book.bookId)) {
+	// 				console.log(book.bookId);
+	// 				data.items.splice(data.items[book.bookId], 1, book);
+	// 			}
+	// 		});
+	// 		console.log(data.items);
 			res.render("books/new", {
 				title: "Add a book",
 				data,
 			});
-		})
-		.catch(err => {
-			console.log(err);
-			res.redirect("/books");
-		});
+		// })
+		// .catch(err => {
+		// 	console.log(err);
+		// 	res.redirect("/books");
+		// });
 }
 
 async function createBook(req, res) {
