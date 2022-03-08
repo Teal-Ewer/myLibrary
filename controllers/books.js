@@ -91,11 +91,17 @@ function show(req, res) {
 function deleteBook(req, res) {
 	Book.findById(req.params.id)
 		.then(book => {
-			if (book.ownedBy.length === 1 && book.ownedBy[0] === req.user.profile._id) {
+			console.log("Book owned by!!", book.ownedBy.length);
+			if (book.ownedBy.length === 1) {
 				Book.findByIdAndDelete(book._id)
 					.then(() => {
-					res.redirect("/profiles/index");
-				});
+							Profile.findByIdAndUpdate(req.user.profile._id)
+					.then(profile => {
+						profile.bookshelf.remove({ _id: book._id })
+						profile.save()
+						.then(() => res.redirect(`/profiles/${profile._id}`))
+				})
+			})
 			} else {
 				Profile.findByIdAndUpdate(req.user.profile._id)
 					.then(profile => {
