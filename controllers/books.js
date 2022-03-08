@@ -29,11 +29,13 @@ async function findBook(req, res) {
 	});
 	Book.find({})
 		.then(books => {
-			books.forEach(book => {
+			books.forEach((book) => {
 				if (bookIds.includes(book.bookId)) {
-					console.log(book)
+					console.log(book.bookId)
+					data.items.splice(data.items[book.bookId], 1, book)
 				}
 			})
+			console.log(data.items)
 			res.render("books/new", {
 				title: "Add a book",
 				data,
