@@ -159,22 +159,17 @@ function updateOwner(req, res) {
 function updateAvailability(req, res) {
 	Book.findByIdAndUpdate(req.params.id)
 		.then(book => {
-			book.availableFrom.includes(profile)
-					? book.availableFrom.remove(profile)
-					: book.availableFrom.push(profile);
-				
-			
-			profile.availableBooks.includes(book)
-					? profile.availableBooks.remove(book)
-					: profile.availableBooks.push(book);
-
-				book.availableFrom.includes(profile)
-					? book.availableFrom.remove(profile)
-					: book.availableFrom.push(profile);
-				book.save();
-				profile.save()
-				.then(() => res.redirect(`/books/${book._id}`))
-			});
+			book.availableFrom.includes(req.user.profile._id)
+				? book.availableFrom.remove(req.user.profile._id)
+				: book.availableFrom.push(req.user.profile._id);
+			book.save().then(book => {
+				Profile.findByIdAndUpdate(req.user.profile._id).then(profile => {
+					profile.availableBooks.includes(book)
+						? profile.availableBooks.remove(book)
+						: profile.availableBooks.push(book)
+					profile.save().then(() => res.redirect(`/books/${book._id}`))
+				})
+			})
 		})
 		.catch(err => {
 			console.log(err);

@@ -14,11 +14,16 @@
 						<button class="btn btn-danger">Delete</button>
 					</form>
 					<% if (book.availableFrom.includes(user.profile._id)) { %>
-					<h5>Available from You</h5>
+					<h5>Your copy is available!</h5>
 					<form action="/books/<%= book._id %>/updateAvailability" method="GET">
-						<button class="btn btn-secondary">Change</button>
+						<button class="btn btn-success">Change</button>
 					</form>  
-					<% } %>
+					<% } else {%>
+							<h5>Your copy is checked out!</h5>
+					<form action="/books/<%= book._id %>/updateAvailability" method="GET">
+						<button class="btn btn-warning">Change</button>
+					</form> 
+						<% } %> 
 				<% } else { %>
 					<form action="/books/<%= book._id %>/update" method="GET">
 						<button class="btn btn-primary">Add</button>
