@@ -167,7 +167,7 @@ function updateAvailability(req, res) {
 					profile.availableBooks.includes(book)
 						? profile.availableBooks.remove(book)
 						: profile.availableBooks.push(book)
-					profile.save().then(() => res.redirect(`/books/${book._id}`))
+					profile.save().then(() => res.redirect("/books"))
 				})
 			})
 		})
