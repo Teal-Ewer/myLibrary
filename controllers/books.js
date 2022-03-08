@@ -63,6 +63,7 @@ async function createBook(req, res) {
 			Profile.findByIdAndUpdate(req.user.profile._id)
 				.then(profile => {
 					profile.bookshelf.push(book)
+					profile.availableBooks.push(book)
 					profile.save()
 						.then(() => res.redirect("/books"));
 				})
