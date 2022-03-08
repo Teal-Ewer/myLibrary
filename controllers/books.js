@@ -32,14 +32,14 @@ async function findBook(req, res) {
 		.then(books => {
 			books.forEach(book => {
 				if (bookIds.includes(book.bookId)) {
-					dbBooks.push(book)
+					dbBooks.push(book);
 					data.items.splice(data.items[book.bookId], 1);
 				}
-			});;
+			});
 			res.render("books/new", {
 				title: "Add a book",
 				data,
-				dbBooks
+				dbBooks,
 			});
 		})
 		.catch(err => {
