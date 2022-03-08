@@ -23,29 +23,29 @@ async function findBook(req, res) {
 		`https://www.googleapis.com/books/v1/volumes?q=${req.query.search}&maxResults=8&key=${process.env.API_KEY}`
 	);
 	const data = await response.json();
-	// const bookIds = [];
-	// data.items.forEach(item => {
-	// 	bookIds.push(item.id);
-	// });
-	// console.log(bookIds);
-	// Book.find({})
-	// 	.then(books => {
-	// 		books.forEach(book => {
-	// 			if (bookIds.includes(book.bookId)) {
-	// 				console.log(book.bookId);
-	// 				data.items.splice(data.items[book.bookId], 1, book);
-	// 			}
-	// 		});
-	// 		console.log(data.items);
+	const bookIds = [];
+	const dbBooks = [];
+	data.items.forEach(item => {
+		bookIds.push(item.id);
+	});
+	Book.find({})
+		.then(books => {
+			books.forEach(book => {
+				if (bookIds.includes(book.bookId)) {
+					dbBooks.push(book)
+					data.items.splice(data.items[book.bookId], 1);
+				}
+			});;
 			res.render("books/new", {
 				title: "Add a book",
 				data,
+				dbBooks
 			});
-		// })
-		// .catch(err => {
-		// 	console.log(err);
-		// 	res.redirect("/books");
-		// });
+		})
+		.catch(err => {
+			console.log(err);
+			res.redirect("/books");
+		});
 }
 
 async function createBook(req, res) {
@@ -109,7 +109,6 @@ function show(req, res) {
 function deleteBook(req, res) {
 	Book.findById(req.params.id)
 		.then(book => {
-			console.log("Book owned by!!", book.ownedBy.length);
 			if (book.ownedBy.length === 1) {
 				Book.findByIdAndDelete(book._id).then(() => {
 					Profile.findByIdAndUpdate(req.user.profile._id).then(profile => {
