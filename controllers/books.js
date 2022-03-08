@@ -88,4 +88,27 @@ function show(req, res) {
 		});
 }
 
-export { index, findBook, createBook, show };
+function deleteBook(req, res) {
+	Book.findById(req.params.id)
+		.then(book => {
+			if (book.ownedBy.length === 1 && book.ownedBy[0] === req.user.profile._id) {
+				Book.findByIdAndDelete(book._id)
+					.then(() => {
+					res.redirect("/profiles/index");
+				});
+			} else {
+				Profile.findByIdAndUpdate(req.user.profile._id)
+					.then(profile => {
+						profile.bookshelf.remove({ _id: book._id })
+						profile.save()
+						.then(() => res.redirect(`/profiles/${profile._id}`))
+				})
+			}
+		})
+		.catch(err => {
+			console.log(err);
+			res.redirect("/books");
+		});
+}
+
+export { index, findBook, createBook, show, deleteBook };

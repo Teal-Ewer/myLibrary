@@ -9,11 +9,14 @@
 			<div class="col-8">
 				<h2 class="card-title"><%= book.title %></h2>
 				<h4 class="card-title"><%= book.authors.join(", ") %></h4>
-				<form action="/books/<%= book._id %>" method="GET">
-					<button class="btn btn-primary">Details</button>
-				</form>
-				<% if (book.ownedBy.includes(user.profile._id)) { %> 
-					
+				<% if (book.ownedBy.includes(user.profile._id)) { %>
+					<form action="/books/<%= book._id %>?_method=DELETE" method="POST">
+						<button class="btn btn-danger">Remove</button>
+					</form>
+				<% } else { %>
+					<form action="/books/<%= book._id %>" method="GET">
+						<button class="btn btn-primary">Details</button>
+					</form>
 				<% } %> 
 			<% book.availableFrom.forEach(profile => { %>
 				<h5>Available from: <%= profile.name %></h5>
@@ -21,7 +24,6 @@
 			</div>
 		</div>
 		<div class="card-body col-12 row">
-		
 			<p class="card-text"><%= book.description %></p>
 		</div>
 	</div>
