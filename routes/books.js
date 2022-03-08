@@ -9,6 +9,8 @@ router.get("/find", booksCtrl.findBook);
 router.get("/:id/update", isLoggedIn, booksCtrl.updateOwner);
 router.get("/:id", isLoggedIn, booksCtrl.show)
 
+router.put("/:id", isLoggedIn, booksCtrl.updateAvailability)
+
 router.post("/:id", isLoggedIn, booksCtrl.createBook);
 
 

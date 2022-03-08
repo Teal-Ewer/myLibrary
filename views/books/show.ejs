@@ -21,13 +21,13 @@
 				<% if (book.availableFrom.includes(user.profile._id)) { %>
 					<h5>Available from: <%= user.profile.name %>
 					<form action="/profiles/<%= user.profile._id%>?_method=PUT" method="POST">
-						<button class="btn btn-success">Change availability</button>
+						<button class="btn btn-secondary">Change</button>
 					</form>  
-				<% } %>
 				</h5>
-			<% book.availableFrom.forEach(profile => { %>
+				<% } %>
+			<!-- <% book.availableFrom.forEach(profile => { %>
 				<h5>Available from: <%= profile.name %></h5>
-			<% }) %>
+			<% }) %> -->
 			</div>
 		</div>
 		<div class="card-body col-12 row">

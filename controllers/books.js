@@ -93,7 +93,6 @@ async function createBook(req, res) {
 
 function show(req, res) {
 	Book.findById(req.params.id)
-		.populate("availableFrom")
 		.then(book => {
 			res.render("books/show", {
 				title: book.title,
@@ -114,29 +113,21 @@ function deleteBook(req, res) {
 					Profile.findByIdAndUpdate(req.user.profile._id).then(profile => {
 						profile.bookshelf.remove({ _id: book._id });
 						profile.availableBooks.remove({ _id: book._id });
-						profile.save().then(() => res.redirect(`/profiles/${profile._id}`));
+						profile.save().then(() => res.redirect("/books"));
 					});
 				});
 			} else {
-				Book.findByIdAndUpdate(book._id)
-					.then(book => {
-						book.ownedBy.remove({ _id: req.user.profile._id })
-						book.availableFrom.remove({ _id: req.user.profile._id })
-						book.save()
-							.then(book => {
-								Profile.findByIdAndUpdate(req.user.profile._id).then(
-									profile => {
-										profile.bookshelf.remove({ _id: book._id });
-										profile.availableBooks.remove({ _id: book._id });
-										profile
-											.save()
-											.then(() => res.redirect(`/profiles/${profile._id}`));
-									}
-								);
-						})
-					})
-					
-			
+				Book.findByIdAndUpdate(book._id).then(book => {
+					book.ownedBy.remove({ _id: req.user.profile._id });
+					book.availableFrom.remove({ _id: req.user.profile._id });
+					book.save().then(book => {
+						Profile.findByIdAndUpdate(req.user.profile._id).then(profile => {
+							profile.bookshelf.remove({ _id: book._id });
+							profile.availableBooks.remove({ _id: book._id });
+							profile.save().then(() => res.redirect("/books"));
+						});
+					});
+				});
 			}
 		})
 		.catch(err => {
@@ -150,15 +141,13 @@ function updateOwner(req, res) {
 		.then(book => {
 			book.ownedBy.push(req.user.profile._id);
 			book.availableFrom.push(req.user.profile._id);
-			book.save()
-				.then(book => {
-					Profile.findByIdAndUpdate(req.user.profile._id)
-						.then(profile => {
-							profile.bookshelf.push(book);
-							profile.availableBooks.push(book);
-							profile.save().then(() => res.redirect("/books"));
-						});
-				})
+			book.save().then(book => {
+				Profile.findByIdAndUpdate(req.user.profile._id).then(profile => {
+					profile.bookshelf.push(book);
+					profile.availableBooks.push(book);
+					profile.save().then(() => res.redirect("/books"));
+				});
+			});
 		})
 		.catch(err => {
 			console.log(err);
@@ -166,4 +155,8 @@ function updateOwner(req, res) {
 		});
 }
 
-export { index, findBook, createBook, show, deleteBook, updateOwner };
+function updateAvailability(req, res) {
+	
+}
+
+export { index, findBook, createBook, show, deleteBook, updateOwner, updateAvailability };
