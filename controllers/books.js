@@ -113,16 +113,30 @@ function deleteBook(req, res) {
 				Book.findByIdAndDelete(book._id).then(() => {
 					Profile.findByIdAndUpdate(req.user.profile._id).then(profile => {
 						profile.bookshelf.remove({ _id: book._id });
-					
+						profile.availableBooks.remove({ _id: book._id });
 						profile.save().then(() => res.redirect(`/profiles/${profile._id}`));
 					});
 				});
 			} else {
-				Profile.findByIdAndUpdate(req.user.profile._id).then(profile => {
-					profile.bookshelf.remove({ _id: book._id });
-					profile.availableBooks.remove({ _id: book._id });
-					profile.save().then(() => res.redirect(`/profiles/${profile._id}`));
-				});
+				Book.findByIdAndUpdate(book._id)
+					.then(book => {
+						book.ownedBy.remove({ _id: req.user.profile._id })
+						book.availableFrom.remove({ _id: req.user.profile._id })
+						book.save()
+							.then(book => {
+								Profile.findByIdAndUpdate(req.user.profile._id).then(
+									profile => {
+										profile.bookshelf.remove({ _id: book._id });
+										profile.availableBooks.remove({ _id: book._id });
+										profile
+											.save()
+											.then(() => res.redirect(`/profiles/${profile._id}`));
+									}
+								);
+						})
+					})
+					
+			
 			}
 		})
 		.catch(err => {
@@ -131,4 +145,25 @@ function deleteBook(req, res) {
 		});
 }
 
-export { index, findBook, createBook, show, deleteBook };
+function updateOwner(req, res) {
+	Book.findByIdAndUpdate(req.params.id)
+		.then(book => {
+			book.ownedBy.push(req.user.profile._id);
+			book.availableFrom.push(req.user.profile._id);
+			book.save()
+				.then(book => {
+					Profile.findByIdAndUpdate(req.user.profile._id)
+						.then(profile => {
+							profile.bookshelf.push(book);
+							profile.availableBooks.push(book);
+							profile.save().then(() => res.redirect("/books"));
+						});
+				})
+		})
+		.catch(err => {
+			console.log(err);
+			res.redirect("/books");
+		});
+}
+
+export { index, findBook, createBook, show, deleteBook, updateOwner };

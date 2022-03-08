@@ -21,13 +21,13 @@
 		</form>
 	</div>
 
-	<!-- prettier-ignore -->
 	<!-- mongo response card -->
+	<!-- prettier-ignore -->
 	<div class="d-flex flex-wrap">
 		<% dbBooks.forEach(book => { %>
 		<div class="card col-12 col-md-6 col-lg-3 p-2">
 			<div class="row">
-				<img src="<%= book.cover %> " class="rounded-start col-6" alt="..." />
+				<img src="<%= book.cover %>" class="rounded-start col-6" alt="..." />
 				<div class="col-6">
 					<h5 class="card-title"><%= book.title %></h5>
 					<h6 class="card-title">
@@ -40,7 +40,8 @@
 			</div>
 			<div class="card-body col-12 row">
 				<h6>
-					Available from: <%= book.availableFrom.length %> <%= book.availableFrom.length === 1 ? "user" : "users" %> 
+					Available from: <%= book.availableFrom.length %> <%=
+					book.availableFrom.length === 1 ? "user" : "users" %>
 				</h6>
 				<p class="card-text">
 					<%= book.description.substring(0, 200).concat("...") %>
@@ -49,8 +50,8 @@
 		</div>
 		<% }) %>
 
-	<!-- prettier-ignore -->
-	<!-- api response card -->
+		<!-- api response card -->
+		<!-- prettier-ignore -->
 		<% for (let i = 0; i < data.items.length; i++) { %> 
 			<% const book = data.items[i].volumeInfo; %>
 			<% const bookId = data.items[i].id; %>
