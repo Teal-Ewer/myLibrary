@@ -113,12 +113,14 @@ function deleteBook(req, res) {
 				Book.findByIdAndDelete(book._id).then(() => {
 					Profile.findByIdAndUpdate(req.user.profile._id).then(profile => {
 						profile.bookshelf.remove({ _id: book._id });
+					
 						profile.save().then(() => res.redirect(`/profiles/${profile._id}`));
 					});
 				});
 			} else {
 				Profile.findByIdAndUpdate(req.user.profile._id).then(profile => {
 					profile.bookshelf.remove({ _id: book._id });
+					profile.availableBooks.remove({ _id: book._id });
 					profile.save().then(() => res.redirect(`/profiles/${profile._id}`));
 				});
 			}
