@@ -60,13 +60,11 @@ async function createBook(req, res) {
 		availableFrom: req.user.profile._id,
 	})
 		.then(book => {
-			Profile.findByIdAndUpdate(req.user.profile._id)
-				.then(profile => {
-					profile.bookshelf.push(book)
-					profile.availableBooks.push(book)
-					profile.save()
-						.then(() => res.redirect("/books"));
-				})
+			Profile.findByIdAndUpdate(req.user.profile._id).then(profile => {
+				profile.bookshelf.push(book);
+				profile.availableBooks.push(book);
+				profile.save().then(() => res.redirect("/books"));
+			});
 		})
 		.catch(err => {
 			console.log(err);
@@ -94,22 +92,17 @@ function deleteBook(req, res) {
 		.then(book => {
 			console.log("Book owned by!!", book.ownedBy.length);
 			if (book.ownedBy.length === 1) {
-				Book.findByIdAndDelete(book._id)
-					.then(() => {
-							Profile.findByIdAndUpdate(req.user.profile._id)
-					.then(profile => {
-						profile.bookshelf.remove({ _id: book._id })
-						profile.save()
-						.then(() => res.redirect(`/profiles/${profile._id}`))
-				})
-			})
+				Book.findByIdAndDelete(book._id).then(() => {
+					Profile.findByIdAndUpdate(req.user.profile._id).then(profile => {
+						profile.bookshelf.remove({ _id: book._id });
+						profile.save().then(() => res.redirect(`/profiles/${profile._id}`));
+					});
+				});
 			} else {
-				Profile.findByIdAndUpdate(req.user.profile._id)
-					.then(profile => {
-						profile.bookshelf.remove({ _id: book._id })
-						profile.save()
-						.then(() => res.redirect(`/profiles/${profile._id}`))
-				})
+				Profile.findByIdAndUpdate(req.user.profile._id).then(profile => {
+					profile.bookshelf.remove({ _id: book._id });
+					profile.save().then(() => res.redirect(`/profiles/${profile._id}`));
+				});
 			}
 		})
 		.catch(err => {

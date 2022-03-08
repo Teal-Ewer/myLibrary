@@ -2,8 +2,8 @@
 <link rel="stylesheet" href="/stylesheets/style.css">
 <%- include('../partials/nav') %>
 
-<main class="container">
-	<div class="card col-6 p-2 mt-3">
+<main class="container d-flex">
+	<div class="card col-6 p-2 mt-3 row">
 		<div class="row">
 			<img src="<%= book.cover %> " class="rounded-start col-4" alt="..." />
 			<div class="col-8">
@@ -15,7 +15,7 @@
 					</form>
 				<% } else { %>
 					<form action="/books/<%= book._id %>" method="GET">
-						<button class="btn btn-primary">Details</button>
+						<button class="btn btn-primary">Add</button>
 					</form>
 				<% } %> 
 				<% if (book.availableFrom.includes(user.profile._id)) { %>
@@ -25,11 +25,18 @@
 					</form>  
 				<% } %>
 				</h5>
-		
+			<% book.availableFrom.forEach(profile => { %>
+				<h5>Available from: <%= profile.name %></h5>
+			<% }) %>
 			</div>
 		</div>
 		<div class="card-body col-12 row">
 			<p class="card-text"><%= book.description %></p>
+		</div>
+	</div>
+	<div class="card col-6 p-2 mt-3 row">
+		<div class="row">
+			<h1>Reviews</h1>
 		</div>
 	</div>
 </main>
