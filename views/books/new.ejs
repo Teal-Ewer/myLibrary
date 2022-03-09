@@ -1,6 +1,7 @@
 <%- include('../partials/html-head') %>
 <link rel="stylesheet" href="../../public/stylesheets/style.css" />
 <%- include('../partials/nav') %>
+
 <main class="container">
 	<div class="pt-3 row">
 		<h1>Search Results</h1>
@@ -21,11 +22,11 @@
 		</form>
 	</div>
 
-	<!-- mongo response card -->
 	<!-- prettier-ignore -->
-	<div class="d-flex flex-wrap">
+	<!-- mongo response card -->
+	<div class="row g-2">
 		<% dbBooks.forEach(book => { %>
-		<div class="card col-12 col-md-6 col-lg-3 p-2">
+		<div class="card col-12 col-sm-6 col-lg-4 col-xl-3 p-2">
 			<div class="row">
 				<img src="<%= book.cover %>" class="rounded-start col-6" alt="..." />
 				<div class="col-6">
@@ -66,7 +67,7 @@
 					? book.imageLinks.thumbnail 
 					: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2730&q=80"; %>
 
-		<div class="card col-6 col-lg-3 p-2">
+		<div class="card col-12 col-sm-6 col-lg-4 col-xl-3 p-2">
 			<div class="row">
 				<img
 					src="<%= bookCover %>"

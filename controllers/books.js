@@ -20,7 +20,7 @@ function index(req, res) {
 
 async function findBook(req, res) {
 	const response = await fetch(
-		`https://www.googleapis.com/books/v1/volumes?q=${req.query.search}&maxResults=8&key=${process.env.API_KEY}`
+		`https://www.googleapis.com/books/v1/volumes?q=${req.query.search}&maxResults=12&key=${process.env.API_KEY}`
 	);
 	const data = await response.json();
 	const bookIds = [];
@@ -93,11 +93,14 @@ async function createBook(req, res) {
 
 function show(req, res) {
 	Book.findById(req.params.id)
-		// .populate("availableFrom")
+		.populate("availableFrom")
 		.then(book => {
+		console.log(req.user.profile._id)
+			console.log(book.availableFrom)
 			res.render("books/show", {
 				title: book.title,
 				book,
+				thisUser: req.user.profile._id
 			});
 		})
 		.catch(err => {

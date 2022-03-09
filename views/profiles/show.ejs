@@ -3,7 +3,7 @@
 
 
 <main class="container p-3">
-	<h1><%= isSelf ? "Your" : profile.name.split(" ")[0].concat("'s") %> Shelf</h1>
+	<h1><%= isSelf ? "My" : profile.name.split(" ")[0].concat("'s") %> Shelf</h1>
 
 	<% if (profile.bookshelf.length === 0) { %> 
 		<h2><%= isSelf ? "You don't" : profile.name.split(" ")[0].concat(" doesn't") %> have any books yet!</h2>
