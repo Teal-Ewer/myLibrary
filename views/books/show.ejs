@@ -18,9 +18,11 @@
 							<button class="btn btn-danger btn-sm">Delete Book</button>
 						</form>
 					</div>
-						<% if (book.availableFrom.includes(thisUser)) { %>
+						<% if (book.availableFrom.includes(user.profile._id)) { %>
 						<div class="row pt-2">
 							<h5>Lend your copy:</h5>
+						</div>
+						<div class="row pt-2">
 							<form
 								class="form-group"
 								action="/books/<%= book._id %>/updateAvailability"
@@ -31,8 +33,10 @@
 						</div>
 
 						<% } else {%>
-					<div class="row pt-2">
+						<div class="row pt-2">
 							<h5>Your copy is checked out:</h5>
+						</div>
+						<div class="row pt-2">
 							<form
 								class="form-group"
 								action="/books/<%= book._id %>/updateAvailability"
@@ -69,15 +73,24 @@
 						<label for="reviewContent">Leave a Review:</label>
 						<input type="number" name="rating" required min="0" max="5">
 						<label for="rating"> / 5</label>
-						<textarea class="form-control" id="reviewContent" rows="2" name="content" required></textarea>
+						<textarea class="form-control" id="reviewContent" rows="3" name="content" required></textarea>
 					</div>
-					<input type="submit" class="btn btn-primary">
+					<div class="text-right">
+						<input type="submit" class="btn btn-primary">
+					</div>
 				</form>
 				<% book.reviews.forEach(review => { %>
-				 <div class="card mt-1">
+				 <div class="card mt-2">
 					 <div class="card-body">
 						 <p><%= review.content %> </p>
-						 <p class="text-right">-<%= review.reviewer  %> </p>
+						 <p class="text-right">-<%= review.reviewer %></p>
+						 <% if (true) { %>
+							<div class="text-right">
+								<form action="/reviews/<%= review._id %>?_method=DELETE" method="POST">
+									<button class="btn btn-sm btn-danger" type="submit">Delete</button>
+								</form>	
+							</div>
+						 <% } %>
 					 </div>
 				 </div>
 				<% }) %> 

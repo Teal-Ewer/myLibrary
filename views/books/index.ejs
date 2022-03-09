@@ -1,31 +1,33 @@
-<%- include('../partials/html-head') %>
-<%- include('../partials/nav') %>
+<%- include('../partials/html-head') %> <%- include('../partials/nav') %>
 
 <main class="container mt-2">
-
-		<h1>All Books</h1>
-		<form class="form-inline" action="/books/find">
-			<input
+	<h1>All Books</h1>
+	<form class="form-inline" action="/books/find">
+		<input
 			type="text"
 			class="form-control col"
 			name="search"
 			autocomplete="off"
 			placeholder="Find a book"
 			required
-			/>
-						<button class="btn btn-primary ml-2">Search</button>
-			</form>
+		/>
+		<button class="btn btn-primary ml-2">Search</button>
+	</form>
 
 	<div class="row mt-2">
 		<% books.forEach(book => { %>
 		<div class="card col-12 col-sm-6 col-lg-4 col-xl-3 p-1">
 			<div class="row">
-				<img src="<%= book.cover %> " class="rounded-start col-6 pr-1" alt="..." />
+				<img
+					src="<%= book.cover %> "
+					class="rounded-start col-6 pr-1"
+					alt="..."
+				/>
 				<div class="col-6 pl-1">
 					<h5 class="card-title"><%= book.title %></h5>
-					<p class="card-title"><b>
-						<%= book.authors.join(", ").substring(0, 80) %>
-					</b></p>
+					<p class="card-title">
+						<b> <%= book.authors.join(", ").substring(0, 80) %> </b>
+					</p>
 					<form action="/books/<%= book._id %>" method="GET">
 						<button class="btn btn-success">Details</button>
 					</form>
