@@ -93,13 +93,21 @@ async function createBook(req, res) {
 
 function show(req, res) {
 	Book.findById(req.params.id)
-		.populate("reviews")
+		.populate([
+			{ path: "reviews", model: "Review" },
+			{ path: "availableFrom", model: "Profile" },
+		])
 		.then(book => {
-			res.render("books/show", {
-				title: book.title,
-				book,
-				thisUser: req.user.profile._id,
-			});
+			Review.find({ reviewedBook: book._id })
+				.populate("reviewer")
+				.then((review) => {
+					console.log(review)
+					res.render("books/show", {
+						title: book.title,
+						book,
+						review,
+					})
+				})
 		})
 		.catch(err => {
 			console.log(err);

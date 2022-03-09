@@ -83,14 +83,16 @@
 				 <div class="card mt-2">
 					 <div class="card-body">
 						 <p><%= review.content %> </p>
-						 <p class="text-right">-<%= review.reviewer %></p>
-						 <% if (true) { %>
-							<div class="text-right">
+						 <div class="row">
+							 <% if (true) { %>
+							<div class="text-left">
 								<form action="/reviews/<%= review._id %>?_method=DELETE" method="POST">
 									<button class="btn btn-sm btn-danger" type="submit">Delete</button>
 								</form>	
 							</div>
-						 <% } %>
+							<% } %>
+							<p class="text-right">-<%= review.reviewer.name %></p>
+						</div>
 					 </div>
 				 </div>
 				<% }) %> 
