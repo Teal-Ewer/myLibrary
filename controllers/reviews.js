@@ -14,12 +14,10 @@ function createReview(req, res) {
 		content,
 	})
 		.then(review => {
-			Book.findByIdAndUpdate(req.params._id).then(book => {
+      Book.findByIdAndUpdate(review.reviewedBook).then(book => {
 				book.reviews.push(review);
 				book.save();
-				res.render(`books/${book._id}`, {
-					title: `${book.title}`,
-				});
+				res.redirect(`/books/${book._id}`)
 			});
 		})
 		.catch(err => {
