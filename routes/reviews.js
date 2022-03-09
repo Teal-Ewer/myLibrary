@@ -4,6 +4,6 @@ import { isLoggedIn } from "../middleware/middleware.js";
 
 const router = Router();
 
-router.post("/:id/new", reviewsCtrl.new)
+router.post("/:id/new", reviewsCtrl.createReview)
 
 export { router };
