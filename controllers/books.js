@@ -93,10 +93,8 @@ async function createBook(req, res) {
 
 function show(req, res) {
 	Book.findById(req.params.id)
-		.populate("availableFrom")
+		// .populate("availableFrom")
 		.then(book => {
-		console.log(req.user.profile._id)
-			console.log(book.availableFrom)
 			res.render("books/show", {
 				title: book.title,
 				book,
@@ -167,9 +165,9 @@ function updateAvailability(req, res) {
 				: book.availableFrom.push(req.user.profile._id);
 			book.save().then(book => {
 				Profile.findByIdAndUpdate(req.user.profile._id).then(profile => {
-					profile.availableBooks.includes(book)
+					profile.availableBooks.includes(book._id)
 						? profile.availableBooks.remove(book)
-						: profile.availableBooks.push(book)
+						: profile.availableBooks.push(book);
 					profile.save().then(() => res.redirect("/books"))
 				})
 			})

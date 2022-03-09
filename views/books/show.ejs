@@ -32,11 +32,7 @@
 			</div>
 		</div>
 		<div class="card-body col-12 row">
-			<% let available = [] %> 
-			<% book.availableFrom.forEach(profile => { %>
-			 <% available.push(profile.name) %> 
-			<% }) %>
-			<p>Available from: <%= available.join(", ") %> </p>
+		
 			<p class="card-text"><%= book.description %></p>
 		</div>
 	</div>
