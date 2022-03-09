@@ -1,5 +1,4 @@
-<%- include('../partials/html-head') %>
-<%- include('../partials/nav') %>
+<%- include('../partials/html-head') %> <%- include('../partials/nav') %>
 
 <main class="container">
 	<div class="pt-3 row">
@@ -55,9 +54,9 @@
 		<% for (let i = 0; i < data.items.length; i++) { %> 
 			<% const book = data.items[i].volumeInfo; %>
 			<% const bookId = data.items[i].id; %>
-			<% const bookTitle = book.title; %>
+			<% const bookTitle = book.title.substring(0, 60); %>
 			<% const bookAuthor = book.authors 
-					? book.authors.join(", ")
+					? book.authors.join(", ").substring(0, 50)
 					: "No author available"; %>
 			<% const bookDescription = book.description 
 					? book.description.substring(0, 200).concat("...") 
