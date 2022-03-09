@@ -2,29 +2,27 @@
 <%- include('../partials/nav') %>
 
 <main class="container">
-	<div class="row pt-3 ">
+	<div class="row pt-3">
 		<% profiles.forEach(profile => { %>
-		<div class="card col-6 col-lg-3 col-xl-2 p-2"
-		>
-				<a class="text-decoration-none" href="/profiles/<%= profile._id %>">
+			<div class="card" style="width: 12rem;">
+				<a class="text-decoration-none" href="/profiles/<%= profile._id %>"></a>
 						<% if (profile.avatar) { %>
-						<img
-							class="card-img-top"
-							src="<%= profile.avatar %>"
-							alt="<%= profile.name %>'s avatar"
-							width="100%"
-						/>
-						<% } else {%>
-						<img
-							class="card-img-top"
-							src="/images/icons/user.png"
-							alt="A placeholder avatar"
-							width="100%"
-						/>
-						<% } %>
-						<div class="card-body">
-							<p class="card-title fs-3 text-dark"><%= profile.name %></p>
-						</div>
+									<img
+										class="card-img-top"
+										src="<%= profile.avatar %>"
+										alt="<%= profile.name %>'s avatar"
+										width="100%"
+									/>
+									<% } else {%>
+									<img
+										class="card-img-top"
+										src="/images/icons/user.png"
+										alt="A placeholder avatar"
+										width="100%"
+									/>
+									<% } %>
+					<div class="card-body">
+						<h5 class="card-title fs-3 text-dark"><%= profile.name %></h5>
 					</div>
 				</a>
 			</div>
@@ -32,5 +30,6 @@
 		</div>
 	</div>
 </main>
+
 
 <%- include('../partials/footer') %>
