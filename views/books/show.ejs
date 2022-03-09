@@ -88,7 +88,7 @@
 					 <div class="card-body">
 						 <p><%= review.content %> </p>
 						 <div class="row">
-							 <% if (true) { %>
+							 <% if (review.reviewer.id === user.profile.id) { %>
 							<div class="text-left">
 								<form action="/reviews/<%= review._id %>?_method=DELETE" method="POST">
 									<button class="btn btn-sm btn-danger" type="submit">Delete</button>
