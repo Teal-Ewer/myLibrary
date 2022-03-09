@@ -65,11 +65,13 @@
 			<div class="card-body">
 				<h2 class="card-title">Reviews</h2>
 				<form action="/reviews/<%= book._id %>/new" method="POST">
-				<div class="form-group">
-					<label for="reviewContnet">Leave a Review</label>
-					<textarea class="form-control" id="reviewContent" rows="2" name="text"></textarea>
- 				</div>
-					<button type="submit" class="btn btn-primary">Submit</button>
+					<div class="form-group">
+						<label for="reviewContent">Leave a Review:</label>
+						<input type="number" name="rating" required min="0" max="5">
+						<label for="rating"> / 5</label>
+						<textarea class="form-control" id="reviewContent" rows="2" name="content" required></textarea>
+					</div>
+					<input type="submit" class="btn btn-primary">
 				</form>
 			</div>
 		</div>
