@@ -93,19 +93,17 @@ async function createBook(req, res) {
 
 function show(req, res) {
 	Book.findById(req.params.id)
-		.populate([
-			{ path: "reviews", model: "Review" },
-			{ path: "availableFrom", model: "Profile" },
-		])
+		.populate(["reviews", "availableFrom"])
 		.then(book => {
 			Review.find({ reviewedBook: book._id })
-				.populate("reviewer")
-				.then((review) => {
-					console.log(review)
+				// .populate({ path: "reviewer", model: "Profile"})
+				.then((reviews) => {
+					reviews.forEach(review => {
+						review.populate("reviewer")
+					})
 					res.render("books/show", {
 						title: book.title,
 						book,
-						review,
 					})
 				})
 		})
