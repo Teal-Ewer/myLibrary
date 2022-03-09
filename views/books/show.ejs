@@ -1,65 +1,75 @@
 <%- include('../partials/html-head') %> <%- include('../partials/nav') %>
 
 <main class="container">
-	<div class="card col-6 p-2 mt-3">
-		<div class="row">
-			<img src="<%= book.cover %>" class="card-img-top col-4" alt="..." />
-			<div class="col-8">
-				<div class="row">
-					<h2 class="card-title"><%= book.title %></h2>
-				</div>
-				<div class="row">
-					<h4 class="card-title"><%= book.authors.join(", ") %></h4>
-				</div>
-				<% if (book.ownedBy.includes(user.profile._id)) { %>
-				<div class="row">
-					<form action="/books/<%= book._id %>?_method=DELETE" method="POST">
-						<button class="btn btn-danger btn-sm">Delete Book</button>
-					</form>
-				</div>
-					<% if (book.availableFrom.includes(thisUser)) { %>
+	<div class="d-flex mt-3">
+		<div class="card col-6 p-2">
+			<div class="row pr-1">
+				<img src="<%= book.cover %>" class="card-img-top col-4" alt="..." />
+				<div class="col-8">
+					<div class="row">
+						<h2 class="card-title"><%= book.title %></h2>
+					</div>
+					<div class="row">
+						<h4 class="card-title"><%= book.authors.join(", ") %></h4>
+					</div>
+					<% if (book.ownedBy.includes(user.profile._id)) { %>
+					<div class="row">
+						<form action="/books/<%= book._id %>?_method=DELETE" method="POST">
+							<button class="btn btn-danger btn-sm">Delete Book</button>
+						</form>
+					</div>
+						<% if (book.availableFrom.includes(thisUser)) { %>
+						<div class="row pt-2">
+							<h5>Lend your copy:</h5>
+							<form
+								class="form-inline"
+								action="/books/<%= book._id %>/updateAvailability"
+								method="GET"
+							>
+								<button class="btn btn-success btn-sm ml-1">Lend Book</button>
+							</form>
+						</div>
+
+						<% } else {%>
 					<div class="row pt-2">
-						<h5>Lend your copy:</h5>
-						<form
-							class="form-inline"
-							action="/books/<%= book._id %>/updateAvailability"
-							method="GET"
-						>
-							<button class="btn btn-success btn-sm ml-1">Lend Book</button>
-						</form>
-					</div>
+							<h5>Your copy is checked out:</h5>
+							<form
+								class="form-inline"
+								action="/books/<%= book._id %>/updateAvailability"
+								method="GET"
+							>
+								<button class="btn btn-success btn-sm ml-1">Return Book</button>
+							</form>
+						</div>
+						<% } %> 
+					
+					<% } else { %>
+					<form action="/books/<%= book._id %>/update" method="GET">
+						<button class="btn btn-primary">Add</button>
+					</form>
+					<% } %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="card-body col-12">
+					<p class="card-text"><%= book.description %></p>
+				</div>
+			</div>
+		</div>
 
-					<% } else {%>
-				<div class="row pt-2">
-						<h5>Your copy is checked out:</h5>
-						<form
-							class="form-inline"
-							action="/books/<%= book._id %>/updateAvailability"
-							method="GET"
-						>
-							<button class="btn btn-success btn-sm ml-1">Return Book</button>
-						</form>
-					</div>
-					<% } %> 
-				
-				<% } else { %>
-				<form action="/books/<%= book._id %>/update" method="GET">
-					<button class="btn btn-primary">Add</button>
+		<div class="card col-6">
+			<div class="card-body">
+				<h2 class="card-title">Reviews</h2>
+				<form action="">
+				<div class="form-group">
+					<label for="reviewContnet">Leave a Review</label>
+					<textarea class="form-control" id="reviewContent" rows="2"></textarea>
+ 				</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
 				</form>
-				<% } %>
 			</div>
 		</div>
-		<div class="row">
-			<div class="card-body col-12">
-				<p class="card-text"><%= book.description %></p>
-			</div>
-		</div>
-	</div>
 
-	<div class="card col-6 p-2 mt-3">
-		<div class="row">
-			<h1>Reviews</h1>
-		</div>
 	</div>
 </main>
 
