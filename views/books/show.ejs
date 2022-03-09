@@ -18,7 +18,9 @@
 							<button class="btn btn-danger btn-sm">Delete Book</button>
 						</form>
 					</div>
-						<% if (book.availableFrom.includes(user.profile._id)) { %>
+					<% const availableIds = [] %>
+					<% book.availableFrom.forEach(profile => availableIds.push(profile.id)) %>
+						<% if (availableIds.includes(user.profile.id)) { %>
 						<div class="row pt-2">
 							<h5>Lend your copy:</h5>
 						</div>
@@ -57,7 +59,9 @@
 
 			<div class="row">
 				<div class="card-body col-12">
-					<p>Available from: <b>Teal, Mike</b></p>
+					<% const availableNames = [] %>
+					<% book.availableFrom.forEach(profile => availableNames.push(profile.name)) %>
+						<p>Available from: <b><%= availableNames.join(" ,") %></b></p>
 					<p class="card-text"><%= book.description %></p>
 				</div>
 			</div>
