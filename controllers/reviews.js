@@ -26,4 +26,15 @@ function createReview(req, res) {
 		});
 }
 
-export { createReview };
+function deleteReview(req, res) {
+	Review.findByIdAndDelete(req.params.id)
+		.then(() => {
+			res.redirect("/books");
+		})
+		.catch(err => {
+			console.log(err);
+			res.redirect("/books");
+		});
+}
+
+export { createReview, deleteReview as delete };

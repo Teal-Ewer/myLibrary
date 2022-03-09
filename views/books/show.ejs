@@ -74,7 +74,7 @@
 				<h2 class="card-title">Reviews</h2>
 				<form action="/reviews/<%= book._id %>/new" method="POST">
 					<div class="form-group">
-						<label for="reviewContent">Leave a Review:</label>
+						<label for="reviewContent">Leave a review:</label>
 						<input type="number" name="rating" required min="0" max="5">
 						<label for="rating"> / 5</label>
 						<textarea class="form-control" id="reviewContent" rows="3" name="content" required></textarea>
@@ -87,16 +87,16 @@
 				 <div class="card mt-2">
 					 <div class="card-body">
 						 <p><%= review.content %> </p>
-						 <div class="row">
-							 <% if (review.reviewer.id === user.profile.id) { %>
-							<div class="text-left">
-								<form action="/reviews/<%= review._id %>?_method=DELETE" method="POST">
-									<button class="btn btn-sm btn-danger" type="submit">Delete</button>
+						 <% if (review.reviewer.id === user.profile.id) { %>
+							<div class="d-flex justify-content-between">
+								<form class="text-left inline-form" action="/reviews/<%= review._id %>?_method=DELETE" method="POST">
+									<button class="btn btn-sm btn-danger" type="submit">Remove</button>
 								</form>	
+							<% } else { %>
+							<div>
+								<% } %> 
+							<p class="text-right">- <%= review.reviewer.name %></p>
 							</div>
-							<% } %>
-							<p class="text-right">-<%= review.reviewer.name %></p>
-						</div>
 					 </div>
 				 </div>
 				<% }) %> 
