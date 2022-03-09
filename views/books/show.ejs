@@ -1,34 +1,48 @@
-<%- include('../partials/html-head') %>
-<%- include('../partials/nav') %>
+<%- include('../partials/html-head') %> <%- include('../partials/nav') %>
 
 <main class="container">
 	<div class="card col-6 p-2 mt-3">
 		<div class="row">
 			<img src="<%= book.cover %>" class="card-img-top col-4" alt="..." />
 			<div class="col-8">
-				<h2 class="card-title"><%= book.title %></h2>
-				<h4 class="card-title"><%= book.authors.join(", ") %></h4>
-
+				<div class="row">
+					<h2 class="card-title"><%= book.title %></h2>
+				</div>
+				<div class="row">
+					<h4 class="card-title"><%= book.authors.join(", ") %></h4>
+				</div>
 				<% if (book.ownedBy.includes(user.profile._id)) { %>
-				<form action="/books/<%= book._id %>?_method=DELETE" method="POST">
-					<button class="btn btn-danger">Remove Book</button>
-				</form>
+				<div class="row">
+					<form action="/books/<%= book._id %>?_method=DELETE" method="POST">
+						<button class="btn btn-danger">Delete Book</button>
+					</form>
+				</div>
+					<% if (book.availableFrom.includes(thisUser)) { %>
+					<div class="row pt-2">
+						<h5>Lend your copy:</h5>
+						<form
+							class="form-inline"
+							action="/books/<%= book._id %>/updateAvailability"
+							method="GET"
+						>
+							<button class="btn btn-success btn-sm ml-1">Lend Book</button>
+						</form>
+					</div>
 
-				<% if (book.availableFrom.includes(thisUser)) { %>
-				<h5>Check out your copy</h5>
-				<form action="/books/<%= book._id %>/updateAvailability" method="GET">
-					<button class="btn btn-warning">Check Out</button>
-				</form>
-				<% } else {%>
-				<h5>Your copy is checked out!</h5>
-				<form
-					class="d-block"
-					action="/books/<%= book._id %>/updateAvailability"
-					method="GET"
-				>
-					<button class="btn btn-warning">Check In</button>
-				</form>
-				<% } %> <% } else { %>
+					<% } else {%>
+				<div class="row pt-2">
+						<h5>Your copy is checked out:</h5>
+						<form
+							class="form-inline"
+							action="/books/<%= book._id %>/updateAvailability"
+							method="GET"
+						>
+							<button class="btn btn-success btn-sm ml-1">Return Book</button>
+						</form>
+					</div>
+					<% } %> 
+				
+				<% } else { %>
 				<form action="/books/<%= book._id %>/update" method="GET">
 					<button class="btn btn-primary">Add</button>
 				</form>
@@ -39,7 +53,7 @@
 			<div class="card-body col-12">
 				<p class="card-text"><%= book.description %></p>
 			</div>
-		</div>	
+		</div>
 	</div>
 
 	<div class="card col-6 p-2 mt-3">
