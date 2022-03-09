@@ -14,6 +14,7 @@ router.get(
 	isLoggedIn,
 	booksCtrl.updateAvailability
 );
+
 router.post("/:id", isLoggedIn, booksCtrl.createBook);
 
 router.delete("/:id", isLoggedIn, booksCtrl.deleteBook);

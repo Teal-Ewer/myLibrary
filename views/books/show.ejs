@@ -50,17 +50,21 @@
 					<% } %>
 				</div>
 			</div>
+
 			<div class="row">
 				<div class="card-body col-12">
+					<p>Available from: <b>Teal, Mike</b></p>
 					<p class="card-text"><%= book.description %></p>
 				</div>
 			</div>
 		</div>
 
+<%# left card ends %> 
+
 		<div class="card col-6">
 			<div class="card-body">
 				<h2 class="card-title">Reviews</h2>
-				<form action="">
+				<form action="/reviews/<%= book._id %>/new" method="POST">
 				<div class="form-group">
 					<label for="reviewContnet">Leave a Review</label>
 					<textarea class="form-control" id="reviewContent" rows="2"></textarea>
