@@ -22,7 +22,7 @@
 						<div class="row pt-2">
 							<h5>Lend your copy:</h5>
 							<form
-								class="form-inline"
+								class="form-group"
 								action="/books/<%= book._id %>/updateAvailability"
 								method="GET"
 							>
@@ -34,7 +34,7 @@
 					<div class="row pt-2">
 							<h5>Your copy is checked out:</h5>
 							<form
-								class="form-inline"
+								class="form-group"
 								action="/books/<%= book._id %>/updateAvailability"
 								method="GET"
 							>
@@ -73,8 +73,17 @@
 					</div>
 					<input type="submit" class="btn btn-primary">
 				</form>
+				<% book.reviews.forEach(review => { %>
+				 <div class="card mt-1">
+					 <div class="card-body">
+						 <p><%= review.content %> </p>
+						 <p class="text-right">-<%= review.reviewer  %> </p>
+					 </div>
+				 </div>
+				<% }) %> 
 			</div>
 		</div>
+
 
 	</div>
 </main>

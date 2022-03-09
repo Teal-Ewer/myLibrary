@@ -93,12 +93,12 @@ async function createBook(req, res) {
 
 function show(req, res) {
 	Book.findById(req.params.id)
-		// .populate("availableFrom")
+		.populate("reviews")
 		.then(book => {
 			res.render("books/show", {
 				title: book.title,
 				book,
-				thisUser: req.user.profile._id
+				thisUser: req.user.profile._id,
 			});
 		})
 		.catch(err => {
@@ -168,7 +168,7 @@ function updateAvailability(req, res) {
 					profile.availableBooks.includes(book._id)
 						? profile.availableBooks.remove(book)
 						: profile.availableBooks.push(book);
-					profile.save().then(() => res.redirect("/books"))
+					profile.save().then(() => res.redirect(`/books/${book._id}`))
 				})
 			})
 		})
