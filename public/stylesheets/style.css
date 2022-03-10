@@ -9,7 +9,16 @@
 }
 
 body {
-	background-color: #e9eef2;
+  min-height: 100vh;
+	background: linear-gradient(to top right, #E9EEF2, #AEC0D1);
+}
+
+.navbar {
+  background-color: #E9EEF2;
+}
+
+.searchbar {
+  background-color: #E9EEF2;
 }
 
 .specialFlex {
