@@ -87,7 +87,11 @@
 				<% book.reviews.forEach(review => { %>
 				 <div class="card mt-2">
 					 <div class="card-body">
-						 <p><%= review.content %></p>
+						 <p>
+							 <span><%= review.rating %></span>
+							 <br>
+							 <%= review.content %>
+							</p>
 						 <% if (review.reviewer.id === user.profile.id) { %>
 							<div class="d-flex justify-content-between m-0">
 								<form class="text-left inline-form" action="/reviews/<%= review._id %>?_method=DELETE" method="POST">
