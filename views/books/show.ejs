@@ -1,8 +1,8 @@
 <%- include('../partials/html-head') %> <%- include('../partials/nav') %>
 
-<main class="container">
+<main class="container special">
 	<div class="d-flex mt-3">
-		<div class="card col-6 p-2">
+		<div class="card col-6 p-4">
 			<div class="row pr-1">
 				<img src="<%= book.cover %>" class="card-img-top col-4" alt="..." />
 				<div class="col-8">
@@ -22,7 +22,7 @@
 					<% book.availableFrom.forEach(profile => availableIds.push(profile.id)) %>
 						<% if (availableIds.includes(user.profile.id)) { %>
 						<div class="row pt-2">
-							<h5>Lend your copy:</h5>
+							<h6>Lend your copy:</h6>
 						</div>
 						<div class="row pt-2">
 							<form
@@ -36,7 +36,7 @@
 
 						<% } else {%>
 						<div class="row pt-2">
-							<h5>Your copy is checked out:</h5>
+							<h6>Your copy is checked out:</h6>
 						</div>
 						<div class="row pt-2">
 							<form
@@ -62,7 +62,8 @@
 					<% const availableNames = [] %>
 					<% book.availableFrom.forEach(profile => availableNames.push(profile.name)) %>
 						<p>Available from: <b><%= availableNames.join(" ,") %></b></p>
-					<p class="card-text"><%= book.description %></p>
+						<a href="https://books.google.com/books?id=<%= book.bookId %>&hl=&source=gbs_api" target="_blank">View on Google Books</a>
+					<p class="card-text mt-2"><%= book.description %></p>
 				</div>
 			</div>
 		</div>
@@ -86,7 +87,7 @@
 				<% book.reviews.forEach(review => { %>
 				 <div class="card mt-2">
 					 <div class="card-body">
-						 <p><%= review.content %> </p>
+						 <p><%= review.content %></p>
 						 <% if (review.reviewer.id === user.profile.id) { %>
 							<div class="d-flex justify-content-between">
 								<form class="text-left inline-form" action="/reviews/<%= review._id %>?_method=DELETE" method="POST">
