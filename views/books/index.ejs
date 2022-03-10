@@ -28,7 +28,11 @@
 					<p class="card-title">
 						<b> <%= book.authors.join(", ").substring(0, 80) %> </b>
 					</p>
-					<form class="align-self-end" action="/books/<%= book._id %>" method="GET">
+					<form
+						class="align-self-end"
+						action="/books/<%= book._id %>"
+						method="GET"
+					>
 						<button class="btn btn-success">Details</button>
 					</form>
 				</div>
