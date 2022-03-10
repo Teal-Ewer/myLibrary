@@ -81,7 +81,7 @@
 						<textarea class="form-control" id="reviewContent" rows="3" name="content" required></textarea>
 					</div>
 					<div class="text-right">
-						<input type="submit" class="btn btn-primary">
+						<input type="submit" class="btn btn-primary mt-0">
 					</div>
 				</form>
 				<% book.reviews.forEach(review => { %>
@@ -89,14 +89,14 @@
 					 <div class="card-body">
 						 <p><%= review.content %></p>
 						 <% if (review.reviewer.id === user.profile.id) { %>
-							<div class="d-flex justify-content-between">
+							<div class="d-flex justify-content-between m-0">
 								<form class="text-left inline-form" action="/reviews/<%= review._id %>?_method=DELETE" method="POST">
 									<button class="btn btn-sm btn-danger" type="submit">Remove</button>
 								</form>	
 							<% } else { %>
 							<div>
 								<% } %> 
-							<p class="text-right">- <%= review.reviewer.name %></p>
+							<p class="text-right m-0">- <%= review.reviewer.name %></p>
 							</div>
 					 </div>
 				 </div>
