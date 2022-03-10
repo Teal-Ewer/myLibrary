@@ -30,7 +30,7 @@
 								action="/books/<%= book._id %>/updateAvailability"
 								method="GET"
 							>
-								<button class="btn btn-success btn-sm ml-1">Lend Book</button>
+								<button class="btn btn-warning btn-sm ml-1">Lend Book</button>
 							</form>
 						</div>
 
@@ -61,7 +61,7 @@
 				<div class="card-body col-12">
 					<% const availableNames = [] %>
 					<% book.availableFrom.forEach(profile => availableNames.push(profile.name)) %>
-						<p>Available from: <b><%= availableNames.join(" ,") %></b></p>
+						<p>Available from: <b><%= availableNames.join(", ") %></b></p>
 						<a href="https://books.google.com/books?id=<%= book.bookId %>&hl=&source=gbs_api" target="_blank">View on Google Books</a>
 					<p class="card-text mt-2"><%= book.description %></p>
 				</div>
@@ -88,7 +88,7 @@
 				 <div class="card mt-2">
 					 <div class="card-body">
 						 <p>
-							 <span><%= review.rating %></span>
+							 <span><b><%= review.rating %> / 5</b></span>
 							 <br>
 							 <%= review.content %>
 							</p>

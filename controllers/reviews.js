@@ -28,8 +28,8 @@ function createReview(req, res) {
 
 function deleteReview(req, res) {
 	Review.findByIdAndDelete(req.params.id)
-		.then(() => {
-			res.redirect("/books");
+		.then((review) => {
+			res.redirect(`/books/${review.reviewedBook._id}`);
 		})
 		.catch(err => {
 			console.log(err);
