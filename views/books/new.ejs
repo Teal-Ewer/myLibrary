@@ -21,7 +21,7 @@
 		<div
 			class="card col-12 col-sm-6 col-lg-4 col-xl-3 p-1"
 			style="
-				background-image: linear-gradient(to top right, #d5dfe7, #e9eef2);
+				background-image: linear-gradient(to top right, #c3dbee, #b5d8f5);
 				min-height: 28rem;
 			"
 		>
@@ -47,7 +47,7 @@
 					book.availableFrom.length === 1 ? "friend" : "friends" %>
 				</h6>
 				<p class="card-text">
-					<%= book.description.substring(0, 200).concat("...") %>
+					<%= book.description.length < 200 ? book.description : book.description.substring(0, 200).concat("...") %>
 				</p>
 			</div>
 		</div>
@@ -63,7 +63,7 @@
 					? book.authors.join(", ").substring(0, 50)
 					: "No author available"; %>
 			<% const bookDescription = book.description 
-					? book.description.substring(0, 200).concat("...") 
+					? book.description 
 					: "No description available"; %>
 			<% const bookCover = book.imageLinks 
 					? book.imageLinks.thumbnail 
@@ -91,7 +91,7 @@
 				</div>
 			</div>
 			<div class="card-body col-12 row">
-				<p class="card-text"><%= bookDescription %></p>
+				<p class="card-text"><%= bookDescription.length < 200 ? bookDescription : bookDescription.substring(0, 200).concat("...") %></p>
 			</div>
 		</div>
 		<% } %>

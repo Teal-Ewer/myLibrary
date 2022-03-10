@@ -47,7 +47,9 @@
 						book.availableFrom.length === 1 ? "friend" : "friends" %>
 					</h6>
 					<p class="card-text">
-						<%= book.description.substring(0, 200).concat("...") %>
+						<%= book.description.length < 200 
+							? book.description 
+							: book.description.substring(0, 200).concat("...") %>
 					</p>
 				</div>
 			</div>
