@@ -1,11 +1,11 @@
 <%- include('../partials/html-head') %> <%- include('../partials/nav') %>
 
-<main class="container special">
-	<div class="d-flex mt-3">
-		<div class="card col-6 p-4">
+<main class="container">
+	<div class="specialFlex mt-3">
+		<div class="card col-12 col-lg-6 p-4">
 			<div class="row pr-1">
-				<img src="<%= book.cover %>" class="card-img-top col-4" alt="..." />
-				<div class="col-8">
+				<img src="<%= book.cover %>" class="card-img-top col-5" alt="..." />
+				<div class="col-7">
 					<div class="row">
 						<h2 class="card-title"><%= book.title %></h2>
 					</div>
@@ -70,7 +70,7 @@
 
 <%# left card ends %> 
 
-		<div class="card col-6">
+		<div class="card col-12 col-lg-6">
 			<div class="card-body">
 				<h2 class="card-title">Reviews</h2>
 				<form action="/reviews/<%= book._id %>/new" method="POST">
@@ -96,6 +96,7 @@
 							<% } else { %>
 							<div>
 								<% } %> 
+								
 							<p class="text-right m-0">- <%= review.reviewer.name %></p>
 							</div>
 					 </div>
