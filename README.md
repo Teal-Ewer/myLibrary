@@ -1,4 +1,4 @@
-# MEN Stack with OAuth Template
+# myLibrary
 
 This is a MEN Stack template that includes OAuth.
 
