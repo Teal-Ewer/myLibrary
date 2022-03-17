@@ -118,7 +118,6 @@ function deleteBook(req, res) {
 	Book.findById(req.params.id)
 		.then(book => {
 			if (book.ownedBy.length === 1) {
-				// find all reviews for that book and delete them
 				Book.findByIdAndDelete(book._id).then(() => {
 					Profile.findByIdAndUpdate(req.user.profile._id).then(profile => {
 						profile.bookshelf.remove({ _id: book._id });

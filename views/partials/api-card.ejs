@@ -1,0 +1,32 @@
+<div
+  class="card p-1 col-md-6 col-lg-4" 
+  style="
+    background-image: linear-gradient(to top right, #fdfdfd, #d5dfe7);
+    height: 21rem;
+  "
+>
+  <div class="d-flex flex-nowrap">
+    <img
+      src="<%= bookCover %> "
+      class="rounded-start pr-1"
+      alt="..."
+      style="max-height: 12rem"
+    />
+    <div class="pl-1 d-flex flex-column justify-content-between">
+      <h5 class="card-title"><%= bookTitle %></h5>
+      <p class="card-title">
+        <b> <%= bookAuthor %> </b>
+      </p>
+      <form action="/books/<%= bookId %>" method="POST">
+				<button class="btn btn-outline-primary">Add</button>
+			</form>
+    </div>
+  </div>
+  <div class="card-body col-12 row">
+    <p class="card-text d-flex align-items-center">
+      <%= bookDescription.length < 140 ? bookDescription :
+      bookDescription.substring(0, 140).concat("...") %>
+    </p>
+  </div>
+</div>
+
