@@ -1,36 +1,35 @@
-<div
-  class="col card p-1" 
-  style="
-    background-image: linear-gradient(to top right, #fdfdfd, #d5dfe7);
-    min-width: 18rem;
-  "
->
-  <div class="d-flex flex-nowrap">
-    <img
-      src="<%= book.cover %> "
-      class="rounded-start pr-1"
-      alt="..."
-      style="max-height: 12rem"
-    />
-    <div class="pl-1 d-flex flex-column justify-content-between">
-      <h5 class="card-title"><%= book.title %></h5>
-      <p class="card-title">
-        <b> <%= book.authors.join(", ").substring(0, 80) %> </b>
-      </p>
-      <form action="/books/<%= book._id %>" method="GET">
-        <button class="btn btn-primary">Details</button>
-      </form>
-      <h6>
-        Available from: <%= book.availableFrom.length %> <%=
-        book.availableFrom.length === 1 ? "friend" : "friends" %>
-      </h6>
-    </div>
-  </div>
-  <div class="card-body col-12">
-    <p class="card-text line-clamp">
-      <%= book.description %>
-    </p>
-  </div>
+<div class="col">
+	<div
+		class="card mt-3 p-2"
+		style="
+			background-image: linear-gradient(to top right, #fdfdfd, #d5dfe7);
+			min-width: 18rem;
+			min-height: 20rem;
+		"
+	>
+		<div class="d-flex flex-nowrap">
+			<img
+				src="<%= book.cover %> "
+				class="rounded-start pr-lg-1"
+				alt="..."
+				style="max-height: 12rem"
+			/>
+			<div class="pl-1 d-flex flex-column justify-content-between">
+				<h4 class="card-title fs-1"><%= book.title %></h4>
+				<h6>
+					<%= book.authors.join(", ").substring(0, 80) %>
+				</h6>
+				<form action="/books/<%= book._id %>" method="GET">
+					<button class="btn btn-primary">Details</button>
+				</form>
+				<h6 class="mb-0">
+					Available from: <%= book.availableFrom.length %> <%=
+					book.availableFrom.length === 1 ? "friend" : "friends" %>
+				</h6>
+			</div>
+		</div>
+		<div class="card-body pt-3 p-1 col-12">
+			<p class="card-text line-clamp"><%= book.description %></p>
+		</div>
+	</div>
 </div>
-
-

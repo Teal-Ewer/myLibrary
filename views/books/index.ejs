@@ -14,7 +14,7 @@
 		<button class="btn btn-primary ml-2">Search</button>
 	</form>
 
-	<div class="row row-cols-lg-3 row-cols-md-2 gy-2 mt-3 gx-2">
+	<div class="row row-cols-md-2 row-cols-lg-2 row-cols-xlg-3 mt-3 g-3">
 		<% books.reverse().forEach(book => { %>
 			<%- include("../partials/db-card", { book }) %> 
 		<% }) %>
