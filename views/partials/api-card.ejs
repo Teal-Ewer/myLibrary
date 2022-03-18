@@ -1,31 +1,35 @@
-<div
-  class="col card p-1" 
-  style="
-    background-image: linear-gradient(to top right, #fdfdfd, #d5dfe7);
-     min-width: 18rem;
-  "
->
-  <div class="d-flex flex-nowrap">
-    <img
-      src="<%= bookCover %> "
-      class="rounded-start pr-1"
-      alt="..."
-      style="max-height: 12rem"
-    />
-    <div class="pl-1 d-flex flex-column justify-content-between">
-      <h5 class="card-title"><%= bookTitle %></h5>
-      <p class="card-title">
-        <b> <%= bookAuthor %> </b>
+<div class="col px-2">
+  <div
+    class="card mt-3 p-2" 
+    style="
+      background-image: linear-gradient(to top right, #fdfdfd, #d5dfe7);
+      min-width: 20rem;
+			max-width: 32rem;
+			min-height: 20rem;
+		"
+    "
+  >
+    <div class="d-flex flex-nowrap">
+      <img
+        src="<%= bookCover %> "
+        class="rounded-start pr-1"
+        alt="..."
+        style="max-height: 12rem"
+      />
+      <div class="pl-1 d-flex flex-column justify-content-between">
+        <h4 class="card-title fs-1"><%= bookTitle %></h4>
+        <h6 class="card-title">
+          <%= bookAuthor %>
+        </h6>
+        <form action="/books/<%= bookId %>" method="POST">
+          <button class="btn btn-success">Add</button>
+        </form>
+      </div>
+    </div>
+    <div class="card-body pt-3 p-1 col-12">
+      <p class="card-text line-clamp">
+        <%= bookDescription %>
       </p>
-      <form action="/books/<%= bookId %>" method="POST">
-				<button class="btn btn-outline-primary">Add</button>
-			</form>
     </div>
   </div>
-  <div class="card-body col-12">
-    <p class="card-text line-clamp">
-      <%= bookDescription %>
-    </p>
-  </div>
 </div>
-

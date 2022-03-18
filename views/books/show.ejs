@@ -1,122 +1,128 @@
 <%- include('../partials/html-head') %> <%- include('../partials/nav') %>
 
-<main class="container">
-	<div class="d-flex flex-wrap mt-3">
-		
-		<div class="card col-12 col-lg-6 pt-3">
-			<div class="d-flex flex-wrap">
-				<img 
-					src="<%= book.cover %>" 
-					class="card-img-top col-5 p-0" 
-					alt="..." 
-					/>
-				<div class="d-flex flex-column col-7">
-					<div class="row">
-						<h2><%= book.title %></h2>
-					</div>
-					<div class="row">
-						<h4><%= book.authors.join(", ") %></h4>
-					</div>
-					<% if (book.ownedBy.includes(user.profile._id)) { %>
-					<div class="row">
-						<form action="/books/<%= book._id %>?_method=DELETE" method="POST">
-							<button class="btn btn-danger btn-sm">Delete Book</button>
+<main class="container justify-content-between">
+	<div class="row row-cols-lg-2 row-cols-md-1 g-3">
+
+		<div class="col">
+			<div 
+				class="card p-3 mt-3" 
+				style="min-width: 26rem; max-width: 35rem;">
+				<div class="d-flex">
+					<img 
+						src="<%= book.cover %>" 
+						class="card-img-top col-5" 
+						alt="..." 
+						/>
+					<div class="d-flex flex-column col-7">
+						<div class="row">
+							<h2><%= book.title %></h2>
+						</div>
+						<div class="row">
+							<h4><%= book.authors.join(", ") %></h4>
+						</div>
+						<% if (book.ownedBy.includes(user.profile._id)) { %>
+						<div class="row">
+							<form action="/books/<%= book._id %>?_method=DELETE" method="POST">
+								<button class="btn btn-danger btn-sm">Delete Book</button>
+							</form>
+						</div>
+						<% const availableIds = [] %>
+						<% book.availableFrom.forEach(profile => availableIds.push(profile.id)) %>
+							<% if (availableIds.includes(user.profile.id)) { %>
+							<div class="row">
+								<h6>Lend your copy:</h6>
+							</div>
+							<div class="row">
+								<form
+									class="form-group"
+									action="/books/<%= book._id %>/updateAvailability"
+									method="GET"
+								>
+									<button class="btn btn-warning btn-sm">Lend Book</button>
+								</form>
+							</div>
+
+							<% } else {%>
+							<div class="row">
+								<h6>Your copy is checked out:</h6>
+							</div>
+							<div class="row>
+								<form
+									class="form-group"
+									action="/books/<%= book._id %>/updateAvailability"
+									method="GET"
+								>
+									<button class="btn btn-success btn-sm">Return Book</button>
+								</form>
+							</div>
+							<% } %> 
+						
+						<% } else { %>
+						<form action="/books/<%= book._id %>/update" method="GET">
+							<button class="btn btn-primary">Add</button>
 						</form>
+						<% } %>
 					</div>
-					<% const availableIds = [] %>
-					<% book.availableFrom.forEach(profile => availableIds.push(profile.id)) %>
-						<% if (availableIds.includes(user.profile.id)) { %>
-						<div class="row">
-							<h6>Lend your copy:</h6>
-						</div>
-						<div class="row">
-							<form
-								class="form-group"
-								action="/books/<%= book._id %>/updateAvailability"
-								method="GET"
-							>
-								<button class="btn btn-warning btn-sm">Lend Book</button>
-							</form>
-						</div>
-
-						<% } else {%>
-						<div class="row">
-							<h6>Your copy is checked out:</h6>
-						</div>
-						<div class="row>
-							<form
-								class="form-group"
-								action="/books/<%= book._id %>/updateAvailability"
-								method="GET"
-							>
-								<button class="btn btn-success btn-sm">Return Book</button>
-							</form>
-						</div>
-						<% } %> 
-					
-					<% } else { %>
-					<form action="/books/<%= book._id %>/update" method="GET">
-						<button class="btn btn-primary">Add</button>
-					</form>
-					<% } %>
 				</div>
-			</div>
 
-			<div class="row">
-				<div class="card-body col-12">
-					<% const availableNames = [] %>
-					<% book.availableFrom.forEach(profile => availableNames.push(profile.name)) %>
-						<p>Available from: <b><%= availableNames.join(", ") %></b></p>
-						<a href="https://books.google.com/books?id=<%= book.bookId %>&hl=&source=gbs_api" target="_blank">View on Google Books</a>
-					<p class="card-text mt-2"><%= book.description %></p>
+				<div class="row">
+					<div class="card-body col-12">
+						<% const availableNames = [] %>
+						<% book.availableFrom.forEach(profile => availableNames.push(profile.name)) %>
+							<p>Available from: <b><%= availableNames.join(", ") %></b></p>
+							<a href="https://books.google.com/books?id=<%= book.bookId %>&hl=&source=gbs_api" target="_blank">View on Google Books</a>
+						<p class="card-text mt-2"><%= book.description %></p>
+					</div>
 				</div>
 			</div>
 		</div>
 
 
 <%# left card ends %> 
-
-		<div class="card col-12 col-lg-6">
-			<div class="card-body">
-				<h2 class="card-title">Reviews</h2>
-				<form action="/reviews/<%= book._id %>/new" method="POST">
-					<div class="form-group">
-						<div class="d-flex align-items-center justify-content-between">
-							<label for="reviewContent">Leave a review:</label>
-							<div>
-								<input type="number" name="rating" required min="0" max="5">
-								<label for="rating"> / 5</label>
+		<div class="col">
+			<div class="card p-3 mt-3" style="min-width: 26rem;
+		max-width: 35rem;">
+				<div class="card-body">
+					<h2 class="card-title">Reviews</h2>
+					<form action="/reviews/<%= book._id %>/new" method="POST">
+						<div class="form-group">
+							<div class="d-flex align-items-center justify-content-between">
+								<label for="reviewContent">Leave a review:</label>
+								<div>
+									<input type="number" name="rating" required min="0" max="5">
+									<label for="rating"> / 5</label>
+								</div>
 							</div>
+							
+							<textarea class="form-control" id="reviewContent" rows="3" name="content" required></textarea>
 						</div>
-						
-						<textarea class="form-control" id="reviewContent" rows="3" name="content" required></textarea>
+						<div class="text-right">
+							<input type="submit" class="btn btn-primary mt-0">
+						</div>
+					</form>
+					<% book.reviews.forEach(review => { %>
+					<div class="card mt-2">
+						<div class="card-body">
+							<p>
+								<span><b><%= review.rating %> / 5</b></span>
+								<br>
+								<%= review.content %>
+								</p>
+							<% if (review.reviewer.id === user.profile.id) { %>
+								<div class="d-flex justify-content-between m-0">
+									<form class="text-left inline-form" action="/reviews/<%= review._id %>?_method=DELETE" method="POST">
+										<button class="btn btn-sm btn-danger" type="submit">Remove</button>
+									</form>	
+								<% } else { %>
+								<div>
+									<% } %> 
+									
+								<p class="text-right m-0">- <%= review.reviewer.name %></p>
+								</div>
+						</div>
 					</div>
-					<div class="text-right">
-						<input type="submit" class="btn btn-primary mt-0">
-					</div>
-				</form>
-				<% book.reviews.forEach(review => { %>
-				 <div class="card mt-2">
-					 <div class="card-body">
-						 <p>
-							 <span><b><%= review.rating %> / 5</b></span>
-							 <br>
-							 <%= review.content %>
-							</p>
-						 <% if (review.reviewer.id === user.profile.id) { %>
-							<div class="d-flex justify-content-between m-0">
-								<form class="text-left inline-form" action="/reviews/<%= review._id %>?_method=DELETE" method="POST">
-									<button class="btn btn-sm btn-danger" type="submit">Remove</button>
-								</form>	
-							<% } else { %>
-							<div>
-								<% } %> 
-								
-							<p class="text-right m-0">- <%= review.reviewer.name %></p>
-							</div>
-					 </div>
-				 </div>
-				<% }) %> 
+					<% }) %> 
+				</div>
 			</div>
 		</div>
 	</div>

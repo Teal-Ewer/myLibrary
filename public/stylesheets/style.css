@@ -10,7 +10,7 @@
 
 body {
   min-height: 100vh;
-	background: linear-gradient(to top right, #E9EEF2, #125ca2);
+	background: linear-gradient(to top right, #E9EEF2, #9f9f9f);
 }
 
 .navbar {
@@ -40,6 +40,14 @@ body {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.card {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.navbar {
+  box-shadow: 0 0px 20px rgba(0, 0, 0, 0.3);
 }
 
 
