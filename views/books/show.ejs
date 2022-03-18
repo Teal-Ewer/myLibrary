@@ -1,16 +1,21 @@
 <%- include('../partials/html-head') %> <%- include('../partials/nav') %>
 
 <main class="container">
-	<div class="specialFlex mt-3">
-		<div class="card col-12 col-lg-6 p-4">
-			<div class="row pr-1">
-				<img src="<%= book.cover %>" class="card-img-top col-5" alt="..." />
-				<div class="col-7">
+	<div class="d-flex flex-wrap mt-3">
+		
+		<div class="card col-12 col-lg-6 pt-3">
+			<div class="d-flex flex-wrap">
+				<img 
+					src="<%= book.cover %>" 
+					class="card-img-top col-5 p-0" 
+					alt="..." 
+					/>
+				<div class="d-flex flex-column col-7">
 					<div class="row">
-						<h2 class="card-title"><%= book.title %></h2>
+						<h2><%= book.title %></h2>
 					</div>
 					<div class="row">
-						<h4 class="card-title"><%= book.authors.join(", ") %></h4>
+						<h4><%= book.authors.join(", ") %></h4>
 					</div>
 					<% if (book.ownedBy.includes(user.profile._id)) { %>
 					<div class="row">
@@ -21,30 +26,30 @@
 					<% const availableIds = [] %>
 					<% book.availableFrom.forEach(profile => availableIds.push(profile.id)) %>
 						<% if (availableIds.includes(user.profile.id)) { %>
-						<div class="row pt-2">
+						<div class="row">
 							<h6>Lend your copy:</h6>
 						</div>
-						<div class="row pt-2">
+						<div class="row">
 							<form
 								class="form-group"
 								action="/books/<%= book._id %>/updateAvailability"
 								method="GET"
 							>
-								<button class="btn btn-warning btn-sm ml-1">Lend Book</button>
+								<button class="btn btn-warning btn-sm">Lend Book</button>
 							</form>
 						</div>
 
 						<% } else {%>
-						<div class="row pt-2">
+						<div class="row">
 							<h6>Your copy is checked out:</h6>
 						</div>
-						<div class="row pt-2">
+						<div class="row>
 							<form
 								class="form-group"
 								action="/books/<%= book._id %>/updateAvailability"
 								method="GET"
 							>
-								<button class="btn btn-success btn-sm ml-1">Return Book</button>
+								<button class="btn btn-success btn-sm">Return Book</button>
 							</form>
 						</div>
 						<% } %> 
@@ -67,6 +72,7 @@
 				</div>
 			</div>
 		</div>
+
 
 <%# left card ends %> 
 
@@ -113,6 +119,7 @@
 				<% }) %> 
 			</div>
 		</div>
+	</div>
 
 
 	</div>

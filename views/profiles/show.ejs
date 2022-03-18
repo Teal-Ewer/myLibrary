@@ -11,43 +11,10 @@
 	<a href="/"><h3>Search for books to get started!</h3></a>
 	<% } else { %>
 
-	<div class="specialFlex mt-3">
+	<div class="d-flex flex-row flex-wrap mt-3">
 		<% profile.bookshelf.forEach(book => { %>
-		<div
-			class="card col-12 col-sm-6 col-lg-4 col-xl-3 p-1"
-			style="
-				background-image: linear-gradient(to top right, #fdfdfd, #d5dfe7);
-				height: 28rem;
-			"
-		>
-			<div class="row">
-				<img
-					src="<%= book.cover %> "
-					class="rounded-start col-6 pr-1"
-					alt="..."
-				/>
-				<div class="col-6 pl-1 container">
-					<h5 class="card-title"><%= book.title %></h5>
-					<p class="card-title">
-						<b> <%= book.authors.join(", ").substring(0, 80) %> </b>
-					</p>
-					<form action="/books/<%= book._id %>" method="GET">
-						<button class="btn btn-primary">Details</button>
-					</form>
-				</div>
-			</div>
-			<div class="card-body col-12 row">
-				<h6>
-					Available from: <%= book.availableFrom.length %> <%=
-					book.availableFrom.length === 1 ? "friend" : "friends" %>
-				</h6>
-				<p class="card-text">
-					<%= book.description.length < 200 ? book.description :
-					book.description.substring(0, 200).concat("...") %>
-				</p>
-			</div>
-		</div>
-		<% }) %>
+			<%- include("../partials/db-card", { book }) %>
+			<% }) %> 
 	</div>
 	<% } %>
 </main>

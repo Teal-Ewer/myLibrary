@@ -2,7 +2,7 @@
   class="card p-1 col-md-6 col-lg-4" 
   style="
     background-image: linear-gradient(to top right, #fdfdfd, #d5dfe7);
-    height: 21rem;
+    min-height: 22rem;
   "
 >
   <div class="d-flex flex-nowrap">
@@ -22,7 +22,7 @@
 			</form>
     </div>
   </div>
-  <div class="card-body col-12 row">
+  <div class="card-body col-12">
     <p class="card-text d-flex align-items-center">
       <%= bookDescription.length < 140 ? bookDescription :
       bookDescription.substring(0, 140).concat("...") %>
