@@ -93,21 +93,23 @@ async function createBook(req, res) {
 
 function show(req, res) {
 	Book.findById(req.params.id)
-		.populate([{
-			path: "reviews",
-			populate: {
-				path: "reviewer"
-			},
-		},
+		.populate([
 			{
-				path: "availableFrom"
-			}])
+				path: "reviews",
+				populate: {
+					path: "reviewer",
+				},
+			},
+			{
+				path: "availableFrom",
+			},
+		])
 		.then(book => {
-					res.render("books/show", {
-						title: book.title,
-						book,
-					})
-				})
+			res.render("books/show", {
+				title: book.title,
+				book,
+			});
+		})
 		.catch(err => {
 			console.log(err);
 			res.redirect("/books");
@@ -175,9 +177,9 @@ function updateAvailability(req, res) {
 					profile.availableBooks.includes(book._id)
 						? profile.availableBooks.remove(book)
 						: profile.availableBooks.push(book);
-					profile.save().then(() => res.redirect(`/books/${book._id}`))
-				})
-			})
+					profile.save().then(() => res.redirect(`/books/${book._id}`));
+				});
+			});
 		})
 		.catch(err => {
 			console.log(err);

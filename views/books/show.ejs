@@ -13,7 +13,7 @@
 						class="card-img-top col-5" 
 						alt="..." 
 						/>
-					<div class="d-flex flex-column col-7">
+					<div class="d-flex flex-column col-7 justify-content-between">
 						<div class="row">
 							<h2><%= book.title %></h2>
 						</div>
@@ -32,7 +32,7 @@
 							<div class="row">
 								<h6>Lend your copy:</h6>
 							</div>
-							<div class="row">
+							<div class="row mb-0">
 								<form
 									class="form-group"
 									action="/books/<%= book._id %>/updateAvailability"
@@ -46,7 +46,7 @@
 							<div class="row">
 								<h6>Your copy is checked out:</h6>
 							</div>
-							<div class="row>
+							<div class="row">
 								<form
 									class="form-group"
 									action="/books/<%= book._id %>/updateAvailability"
