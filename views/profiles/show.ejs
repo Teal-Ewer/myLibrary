@@ -12,7 +12,7 @@
 	<% } else { %>
 
 	<div class="d-flex flex-row flex-wrap mt-3">
-		<% profile.bookshelf.forEach(book => { %>
+		<% profile.bookshelf.reverse().forEach(book => { %>
 			<%- include("../partials/db-card", { book }) %>
 			<% }) %> 
 	</div>

@@ -13,14 +13,6 @@ body {
 	background: linear-gradient(to top right, #E9EEF2, #9f9f9f);
 }
 
-.navbar {
-  background-color: #E9EEF2;
-}
-
-.searchbar {
-  background-color: #E9EEF2;
-}
-
 .specialFlex {
 	display: flex;
 	flex-flow: row wrap;
@@ -43,11 +35,9 @@ body {
 }
 
 .card {
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .navbar {
-  box-shadow: 0 0px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.3);
 }
-
-

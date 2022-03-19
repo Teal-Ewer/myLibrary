@@ -1,21 +1,19 @@
 <%- include('../partials/html-head') %> <%- include('../partials/nav') %>
 
-<main class="container justify-content-between">
-	<div class="row row-cols-lg-2 row-cols-md-1 g-3">
+<main class="container">
+	<div class="row">
 
-		<div class="col">
-			<div 
-				class="card p-3 mt-3" 
-				style="min-width: 26rem; max-width: 35rem;">
+		<div class="col-lg-6">
+			<div class="card p-3 my-3">
 				<div class="d-flex">
 					<img 
 						src="<%= book.cover %>" 
-						class="card-img-top col-5" 
+						class="col-5 p-0" 
 						alt="..." 
 						/>
-					<div class="d-flex flex-column col-7 justify-content-between">
+					<div class="d-flex flex-column col-7 justify-content-between ml-2">
 						<div class="row">
-							<h2><%= book.title %></h2>
+							<h3><%= book.title %></h3>
 						</div>
 						<div class="row">
 							<h4><%= book.authors.join(", ") %></h4>
@@ -29,38 +27,36 @@
 						<% const availableIds = [] %>
 						<% book.availableFrom.forEach(profile => availableIds.push(profile.id)) %>
 							<% if (availableIds.includes(user.profile.id)) { %>
-							<div class="row">
+							<div class="row d-flex flex-column mb-0">
 								<h6>Lend your copy:</h6>
-							</div>
-							<div class="row mb-0">
 								<form
 									class="form-group"
 									action="/books/<%= book._id %>/updateAvailability"
 									method="GET"
 								>
-									<button class="btn btn-warning btn-sm">Lend Book</button>
+									<button class="btn btn-warning btn-sm mb-0">Lend Book</button>
 								</form>
 							</div>
 
 							<% } else {%>
-							<div class="row">
+							<div class="row d-flex flex-column">
 								<h6>Your copy is checked out:</h6>
-							</div>
-							<div class="row">
 								<form
 									class="form-group"
 									action="/books/<%= book._id %>/updateAvailability"
 									method="GET"
 								>
-									<button class="btn btn-success btn-sm">Return Book</button>
+									<button class="btn btn-success btn-sm mb-0">Return Book</button>
 								</form>
 							</div>
 							<% } %> 
 						
 						<% } else { %>
-						<form action="/books/<%= book._id %>/update" method="GET">
-							<button class="btn btn-primary">Add</button>
-						</form>
+						<div class="row">
+							<form action="/books/<%= book._id %>/update" method="GET">
+								<button class="btn btn-primary">Add to Bookshelf</button>
+							</form>
+						</div>
 						<% } %>
 					</div>
 				</div>
@@ -74,14 +70,14 @@
 						<p class="card-text mt-2"><%= book.description %></p>
 					</div>
 				</div>
+
 			</div>
 		</div>
 
 
 <%# left card ends %> 
-		<div class="col">
-			<div class="card p-3 mt-3" style="min-width: 26rem;
-		max-width: 35rem;">
+		<div class="col-lg-6">
+			<div class="card p-1 my-3">
 				<div class="card-body">
 					<h2 class="card-title">Reviews</h2>
 					<form action="/reviews/<%= book._id %>/new" method="POST">
@@ -117,16 +113,15 @@
 								<div>
 									<% } %> 
 									
-								<p class="text-right m-0">- <%= review.reviewer.name %></p>
+									<p class="text-right m-0">- <%= review.reviewer.name %></p>
 								</div>
+							</div>
 						</div>
-					</div>
 					<% }) %> 
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-
 
 	</div>
 </main>
