@@ -7,7 +7,7 @@
 		<% profiles.forEach(profile => { %>
 			<div class="col">
 				<a class="text-decoration-none hover-none" href="/profiles/<%= profile._id %>">
-					<div class="card m-2" style="width: 10rem; height: 13rem">
+					<div class="card my-3" style="width: 8rem; height: 13rem">
 							<% if (profile.avatar) { %>
 										<img
 											class="card-img-top"
@@ -23,7 +23,7 @@
 											width="100%"
 										/>
 										<% } %>
-						<div class="card-body p-1 d-flex flex-column align-items-center">
+						<div class="card-body p-1 d-flex flex-column align-items-center justify-content-center">
 							<h6 class="card-title text-dark"><%= profile.name %>
 							</>
 						</div>
