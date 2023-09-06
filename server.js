@@ -9,6 +9,9 @@ import methodOverride from "method-override";
 import passport from "passport";
 import { passUserToView } from "./middleware/middleware.js";
 
+// connect to MongoDB with mongoose
+import("./config/database.js");
+
 // load passport
 import("./config/passport.js");
 
@@ -16,8 +19,8 @@ import("./config/passport.js");
 import { router as indexRouter } from "./routes/index.js";
 import { router as authRouter } from "./routes/auth.js";
 import { router as booksRouter } from "./routes/books.js";
-import { router as profilesRouter } from "./routes/profiles.js";
-import { router as reviewsRouter } from "./routes/reviews.js";
+import { router as profilesRouter } from "./routes/profiles.js"
+import { router as reviewsRouter } from "./routes/reviews.js"
 
 // create the express app
 const app = express();
